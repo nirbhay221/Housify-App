@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "723749140504",
+    "project_id": "housify-authentication",
+    "storage_bucket": "housify-authentication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723749140504:android:a3150de8aa51cd93fcab6d",
+        "android_client_info": {
+          "package_name": "com.example.housify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_0yt2MW7STR8ps-1SbU3Fi44PJcNtGV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
