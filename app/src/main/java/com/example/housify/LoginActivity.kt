@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -19,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth
     private lateinit var progressBar: ProgressBar
     private lateinit var headToRegister:Button
+    private lateinit var resetPassword:TextView
 
     public override fun onStart() {
         super.onStart()
@@ -37,16 +38,22 @@ class LoginActivity : AppCompatActivity() {
         password = findViewById(R.id.password)
         loginButton = findViewById(R.id.loginButton)
         progressBar = findViewById(R.id.progressLoginBar)
+        resetPassword = findViewById(R.id.resetPassword)
         auth = FirebaseAuth.getInstance()
         headToRegister.setOnClickListener{
             val intent = Intent(this,RegistrationActivity::class.java)
             startActivity(intent)
             finish()
         }
+        resetPassword.setOnClickListener{
+            val intent = Intent(this,ResetPasswordActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         loginButton.setOnClickListener{
             progressBar.visibility = ProgressBar.VISIBLE
-            var enteredEmail = email.text.toString().trim()
-            var enteredPassword = password.text.toString().trim()
+            val enteredEmail = email.text.toString().trim()
+            val enteredPassword = password.text.toString().trim()
             if(enteredEmail.isEmpty()){
                 Toast.makeText(this,"Enter Email!",Toast.LENGTH_LONG).show()
 
@@ -56,12 +63,26 @@ class LoginActivity : AppCompatActivity() {
         }
             auth.signInWithEmailAndPassword(enteredEmail,enteredPassword)
                 .addOnCompleteListener(this) { task ->
+
                     progressBar.visibility = ProgressBar.INVISIBLE
+
                     if (task.isSuccessful) {
-                        Toast.makeText(this,"Looin Successful",Toast.LENGTH_LONG).show()
-                        val intent = Intent(this,HomeActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        var verified = auth.currentUser?.isEmailVerified
+                        if(verified == true){
+                            val user = auth.currentUser
+                            val intent = Intent(this,HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else{
+                            Toast.makeText(this,"Please verify your email first",Toast.LENGTH_LONG).show()
+
+                        }
+                        Toast.makeText(this,"Login Successful",Toast.LENGTH_LONG).show()
+//
+//                        val intent = Intent(this,HomeActivity::class.java)
+//                        startActivity(intent)
+//                        finish()
                     } else {
                         Toast.makeText(
                             baseContext,
