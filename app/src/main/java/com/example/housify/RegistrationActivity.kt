@@ -27,7 +27,7 @@ class RegistrationActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val intent = Intent(this,HomeActivity::class.java)
+            val intent = Intent(this,PhoneAuthActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -97,6 +97,11 @@ class RegistrationActivity : AppCompatActivity() {
 
                             }
 
+                        val intent = Intent(this,PhoneAuthActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+
 
                     } else {
                         Toast.makeText(
@@ -111,6 +116,7 @@ class RegistrationActivity : AppCompatActivity() {
         headToLogin.setOnClickListener{
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
+
 
 
         }

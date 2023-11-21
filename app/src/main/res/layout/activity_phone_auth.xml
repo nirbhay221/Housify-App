@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="15dp"
-    tools:context=".LoginActivity">
+    tools:context=".PhoneAuthActivity">
     <TextView
-        android:text = "@string/login"
-        android:textSize="30sp"
+        android:text = "Phone Number"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -23,67 +22,51 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
+            android:id="@+id/phoneNumberAuth"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:hint="Email" />
+            android:hint="Phone Number" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="Enter OTP"
+        android:textSize="25sp"
+        android:textStyle="bold"></TextView>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_margin="8dp"
-        app:passwordToggleEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/otpAuth"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword" />
-
+            android:layout_height="58dp"
+            android:hint="OTP" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <ProgressBar
-        android:id="@+id/progressLoginBar"
-        android:visibility="gone"
+    <Button
+        android:id="@+id/enterOTP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ProgressBar>
-
-    <TextView
-        android:id="@+id/resetPassword"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Forgot your password"
-
-        />
-
+        android:text = "Enter OTP"
+        ></Button>
     <Button
-        android:id="@+id/loginButton"
-        android:text="Login"
-        android:layout_marginTop="50px"
-
+        android:id="@+id/sendOTP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Button>
+        android:layout_height="wrap_content"
+        android:text = "Send OTP"
+        ></Button>
     <Button
-        android:id="@+id/headToRegisterActivity"
-        android:text="Head To Register"
-        android:layout_marginTop="50px"
+        android:id="@+id/resendOTP"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text = "Resend OTP"
+        ></Button>
 
-    </Button>
-
-    <Button
-        android:id="@+id/signInWithGoogleBtn"
-        android:text="Sign In With Google"
-        android:layout_marginTop="50px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </Button>
 
 </LinearLayout>

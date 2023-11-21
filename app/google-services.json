@@ -12,7 +12,20 @@
           "package_name": "com.example.housify"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "723749140504-koct3som1teg8celrijc58c06184aiqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.housify",
+            "certificate_hash": "77f41cf1f20f69d256a552d17e4b75ffecc5b308"
+          }
+        },
+        {
+          "client_id": "723749140504-f8phj118gis4iid89fibc4715i8sriq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB_0yt2MW7STR8ps-1SbU3Fi44PJcNtGV4"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723749140504-f8phj118gis4iid89fibc4715i8sriq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
