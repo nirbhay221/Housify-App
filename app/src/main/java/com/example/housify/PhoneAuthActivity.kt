@@ -27,6 +27,7 @@ class PhoneAuthActivity : AppCompatActivity() {
     private lateinit var user:FirebaseUser
     private lateinit var auth:FirebaseAuth
 
+
     private var verificationId : String =""
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -72,6 +73,41 @@ class PhoneAuthActivity : AppCompatActivity() {
                             Toast.makeText(this@PhoneAuthActivity,"$verificationId",Toast.LENGTH_LONG).show()
 
                             Toast.makeText(this@PhoneAuthActivity,"OTP sent",Toast.LENGTH_LONG).show()
+
+                        }
+                    }
+                ).build()
+            PhoneAuthProvider.verifyPhoneNumber(builder)
+        }
+        resendOtp.setOnClickListener{
+
+            var builder = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
+                .setPhoneNumber(phoneNumber.text.toString())
+                .setTimeout(60L, TimeUnit.SECONDS)
+                .setActivity(this)
+                .setCallbacks(
+                    object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                        override fun onVerificationCompleted(p0: PhoneAuthCredential) {
+                            Log.d(TAG,"Verification Passed")
+                            Toast.makeText(this@PhoneAuthActivity,"Verification Completed",Toast.LENGTH_LONG).show()
+
+                        }
+
+                        override fun onVerificationFailed(p0: FirebaseException) {
+
+                            Log.d(TAG,"Verification Failed")
+                        }
+
+                        override fun onCodeSent(
+                            p0: String,
+                            p1: PhoneAuthProvider.ForceResendingToken
+                        ) {
+                            super.onCodeSent(p0, p1)
+                            verificationId = p0
+                            forceResendingToken = p1
+                            Toast.makeText(this@PhoneAuthActivity,"$verificationId",Toast.LENGTH_LONG).show()
+
+                            Toast.makeText(this@PhoneAuthActivity,"OTP resent",Toast.LENGTH_LONG).show()
 
                         }
                     }

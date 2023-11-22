@@ -52,6 +52,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Email"></EditText>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mailUserInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:textIsSelectable="false"/>
+    </com.google.android.material.textfield.TextInputLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="fill_horizontal">
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
@@ -59,5 +81,20 @@
         android:text="LOGOUT"
         tools:layout_editor_absoluteX="151dp"
         tools:layout_editor_absoluteY="354dp" />
+    <Button
+        android:id="@+id/deleteUserDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="354dp" />
+    <Button
+        android:id="@+id/updateUserDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UPDATE"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="354dp" />
+</LinearLayout>
 
 </LinearLayout>

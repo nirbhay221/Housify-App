@@ -68,5 +68,4 @@
         android:text = "Resend OTP"
         ></Button>
 
-
 </LinearLayout>
