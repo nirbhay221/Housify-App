@@ -7,12 +7,16 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import com.example.housify.viewModels.HomeViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeActivity : AppCompatActivity() {
+    private val viewModel by viewModels<HomeViewModel>()
 
     private lateinit var auth : FirebaseAuth
     private lateinit var logoutButton : Button
@@ -30,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
         auth = FirebaseAuth.getInstance()
         firstNameInfo = findViewById(R.id.firstNameInfo)
         lastNameInfo = findViewById(R.id.lastNameInfo)
@@ -38,6 +43,10 @@ class HomeActivity : AppCompatActivity() {
         mailUserInfo=findViewById(R.id.mailUserInfo)
         deleteBtn = findViewById(R.id.deleteUserDetail)
         updateBtn = findViewById(R.id.updateUserDetails)
+        firstNameInfo.setText(viewModel.firstNameSaved)
+        lastNameInfo.setText(viewModel.lastNameSaved)
+        phoneNumberInfo.setText(viewModel.phoneNumberSaved)
+        mailUserInfo.setText(viewModel.userEmailSaved)
         firebaseStore = FirebaseFirestore.getInstance()
         user = auth.currentUser!!
         if(user == null){
@@ -49,19 +58,21 @@ class HomeActivity : AppCompatActivity() {
         val userEmail = user.email
         Toast.makeText(this,"$uid",Toast.LENGTH_LONG).show()
         val userRef = firebaseStore.collection("User").document(uid)
-        userRef.get().addOnSuccessListener { e ->
-            if (e.exists()) {
-                var firstName = e.getString("firstName")
-                var lastName = e.getString("lastName")
-                var phoneNumber = e.getString("number")
-                var mail = userEmail
-                firstNameInfo.setText(firstName)
-                lastNameInfo.setText(lastName)
-                phoneNumberInfo.setText(phoneNumber)
-                mailUserInfo.setText(mail)
-            }
-
+        if (savedInstanceState == null) {
+            viewModel.getUserData(user, firebaseStore)
         }
+        viewModel.userDataFetched.observe(this, Observer { dataFetched ->
+            if (dataFetched) {
+                firstNameInfo.setText(viewModel.firstNameSaved)
+                lastNameInfo.setText(viewModel.lastNameSaved)
+                phoneNumberInfo.setText(viewModel.phoneNumberSaved)
+                mailUserInfo.setText(viewModel.userEmailSaved)
+            }
+        })
+
+
+
+
         updateBtn.setOnClickListener{
             var updatedFirstName = firstNameInfo.text.toString()
             var updatedLastName = lastNameInfo.text.toString()
@@ -78,7 +89,6 @@ class HomeActivity : AppCompatActivity() {
             if(updatedEmail != user.email){
                 isEmailUpdated = true
             }
-
             userRef.update(updatedUserData as Map<String, Any>).addOnSuccessListener {
                 Toast.makeText(this,"User Details updated successfully",Toast.LENGTH_LONG).show()
                 if(isPhoneUpdated){
@@ -137,7 +147,7 @@ class HomeActivity : AppCompatActivity() {
 
 
                             }.addOnFailureListener{
-                                e->
+                                    e->
                                 Log.e("DeleteUser", "Failed to delete associated data: ${e.message}", e)
                                 Toast.makeText(this,"Failure",Toast.LENGTH_LONG).show()
 

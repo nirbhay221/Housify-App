@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/property_details_add"
+    app:startDestination="@id/propertyAddFragment">
+
+    <fragment
+        android:id="@+id/propertyAddFragment"
+        android:name="com.example.housify.fragments.propertyAddFragment"
+        android:label="propertyAddFragment"
+        tools:layout="@layout/fragment_property_add"/>
+
+</navigation>

@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -52,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
         resetPassword = findViewById(R.id.resetPassword)
         signInWithGoogleButton = findViewById(R.id.signInWithGoogleBtn)
         auth = FirebaseAuth.getInstance()
+
         var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("723749140504-f8phj118gis4iid89fibc4715i8sriq5.apps.googleusercontent.com")
             .requestEmail()
@@ -94,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
                         var verified = auth.currentUser?.isEmailVerified
                         if(verified == true){
                             val user = auth.currentUser
-                            val intent = Intent(this,HomeActivity::class.java)
+                            val intent = Intent(this,PropertyAddViewActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
@@ -115,6 +117,8 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
+
+
         }
     }
 
