@@ -2,4 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name = "Home">#1194AA</color>
+    <color name = "Like">#C93790</color>
+    <color name="Chat">#AE7E0F</color>
+
+    <color name="Profile">#A61111</color>
+<!--    <class name ="Profile">#5B37B7</class>-->
+    <color name = "home_20">#331194AA</color>
+    <color name = "like_20">#33C93790</color>
+    <color name = "chat_20">#33AE7E0F</color>
+    <color name = "profile_20">#335B37B7</color>
+
+    <color name = "home_50">#000000</color>
+    <color name = "like_50">#000000</color>
+    <color name = "chat_50">#000000</color>
+    <color name = "profile_50">#000000</color>
 </resources>

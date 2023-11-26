@@ -13,8 +13,9 @@ class MainActivity : AppCompatActivity() {
         startBtn = findViewById(R.id.Start)
         startBtn.setOnClickListener{
 
-            val intent = Intent(this,LoginActivity::class.java)
+            val intent = Intent(this,NavigationActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

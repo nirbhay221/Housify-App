@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="16dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginVertical="6dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = " Apartment"
+                android:textSize="13dp"
+                android:textStyle="bold">
+
+            </TextView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id = "@+id/apartmentTitleName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "Beacon St. Apartments"
+                android:textSize="26dp"
+                android:textStyle="bold">
+
+            </TextView>
+            <TextView
+                android:id = "@+id/deleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:layout_marginLeft="15dp">
+
+            </TextView>
+                <TextView
+                    android:id = "@+id/editBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:layout_marginLeft="5dp">
+
+                </TextView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:id = "@+id/viewApartmentInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "View More Info"
+                android:textSize="13dp"
+                android:textStyle="bold">
+
+            </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text = "Active Price"
+                    android:textSize="13dp"
+                    android:layout_marginLeft="200dp"
+                    android:textStyle="bold">
+
+                </TextView>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/apartmentPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "$ 1234"
+                android:textSize="13dp"
+                android:layout_marginLeft="290dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

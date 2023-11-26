@@ -9,6 +9,15 @@
         android:id="@+id/propertyAddFragment"
         android:name="com.example.housify.fragments.propertyAddFragment"
         android:label="propertyAddFragment"
-        tools:layout="@layout/fragment_property_add"/>
+        tools:layout="@layout/fragment_property_add">
+        <action
+            android:id="@+id/action_propertyAddFragment_to_propertyViewFragment"
+            app:destination="@id/propertyViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/propertyViewFragment"
+        android:name="com.example.housify.fragments.propertyViewFragment"
+        android:label="propertyViewFragment"
+        tools:layout="@layout/fragment_property_view"/>
 
 </navigation>
