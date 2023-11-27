@@ -11,16 +11,11 @@
         android:label="homeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_favoritePropertySelectedFragment"
-            app:destination="@id/favoritePropertySelectedFragment" />
+            android:id="@+id/action_homeFragment_to_propertyInfoFragment"
+            app:destination="@id/propertyInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favoritePropertySelectedFragment"
-        android:name="com.example.housify.fragments.FavoritePropertySelectedFragment"
-        android:label="FavoritePropertySelectedFragment"
-        tools:layout="@layout/favorite_property_selected_fragment">
-        <action
-            android:id="@+id/action_favoritePropertySelectedFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        android:id="@+id/propertyInfoFragment"
+        android:name="com.example.housify.fragments.propertyInfoFragment"
+        android:label="propertyInfoFragment" />
 </navigation>
