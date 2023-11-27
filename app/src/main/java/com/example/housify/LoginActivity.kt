@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val intent = Intent(this,HomeActivity::class.java)
+            val intent = Intent(this,NavigationActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -132,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
                 FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
                     signInTask ->
                     if(signInTask.isSuccessful){
-                        val googleIntent = Intent(this,HomeActivity::class.java)
+                        val googleIntent = Intent(this,NavigationActivity::class.java)
                         startActivity(googleIntent)
                         finish()
                     }
