@@ -18,6 +18,10 @@
         android:id="@+id/propertyViewFragment"
         android:name="com.example.housify.fragments.propertyViewFragment"
         android:label="propertyViewFragment"
-        tools:layout="@layout/fragment_property_view"/>
+        tools:layout="@layout/fragment_property_view">
+        <action
+            android:id="@+id/action_propertyViewFragment_to_propertyAddFragment"
+            app:destination="@id/propertyAddFragment" />
+    </fragment>
 
 </navigation>

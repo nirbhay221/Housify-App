@@ -13,9 +13,16 @@
         <action
             android:id="@+id/action_homeFragment_to_propertyInfoFragment"
             app:destination="@id/propertyInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_propertyViewFragment2"
+            app:destination="@id/propertyViewFragment2" />
     </fragment>
     <fragment
         android:id="@+id/propertyInfoFragment"
         android:name="com.example.housify.fragments.propertyInfoFragment"
         android:label="propertyInfoFragment" />
+    <fragment
+        android:id="@+id/propertyViewFragment2"
+        android:name="com.example.housify.fragments.propertyViewFragment"
+        android:label="propertyViewFragment" />
 </navigation>

@@ -47,6 +47,9 @@ class NavigationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
+
+
+
         homeLayout = findViewById(R.id.homeLayout)
         profileLayout= findViewById(R.id.profileLayout)
         chatLayout = findViewById(R.id.chatLayout)

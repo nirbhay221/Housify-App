@@ -56,6 +56,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         recyclerView.adapter = PropertyPostedAdapter
         binding.propertyPostedRetrieveList
 
+
         EventChangeListener()
 
 

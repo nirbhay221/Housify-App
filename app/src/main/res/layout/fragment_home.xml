@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:orientation="vertical">
     <androidx.recyclerview.widget.RecyclerView
         android:id = "@+id/propertyPostedRetrieveList"
         android:layout_width="match_parent"
@@ -14,4 +13,21 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         android:orientation="horizontal"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+
+        android:id = "@+id/addPropertyHomeFragment"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="280dp"
+        android:gravity="center"
+        android:background="@drawable/round_add_button_ui"
+        android:drawableStart="@drawable/baseline_add_24"
+        android:drawablePadding="4dp"
+        android:paddingLeft="23dp"
+        android:paddingTop="5dp"/>
+
+
 </LinearLayout>
