@@ -66,13 +66,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/propertyPasscodeInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confirm Passcode" />
+            android:hint="Confirm Passcode"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
