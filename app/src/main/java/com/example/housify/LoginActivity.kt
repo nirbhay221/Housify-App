@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
                         var verified = auth.currentUser?.isEmailVerified
                         if(verified == true){
                             val user = auth.currentUser
-                            val intent = Intent(this,PropertyAddViewActivity::class.java)
+                            val intent = Intent(this,NavigationActivity::class.java)
                             startActivity(intent)
                             finish()
                         }

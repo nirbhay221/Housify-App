@@ -18,16 +18,16 @@
             android:layout_marginLeft="180dp"
             android:layout_marginTop="90dp"
             android:text="Alex"
-            android:textSize="26dp"
+            android:textSize="20dp"
             android:textStyle="bold"></TextView>
 
         <TextView
             android:id="@+id/profileUserMailInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="130dp"
             android:text="alex@gmail.com"
-            android:textSize="26dp"
+            android:textSize="20dp"
             android:textStyle="bold"></TextView>
 
         <View
@@ -43,6 +43,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id = "@+id/secondLayout"
         android:layout_below="@+id/firstLayout"
         android:orientation="horizontal">
         <ImageView
@@ -62,17 +63,128 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow"
+            android:layout_marginLeft="80dp">
+        </ImageView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/thirdLayout"
+        android:layout_below="@+id/secondLayout"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person"
             android:layout_marginLeft="50dp">
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:layout_marginLeft="50dp"
+            android:textSize="18dp">
+        </TextView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"
+            android:layout_marginLeft="145dp">
         </ImageView>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LOGOUT"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="354dp" />
+        android:id="@+id/fourthLayout"
+        android:layout_below="@+id/thirdLayout"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person"
+            android:layout_marginLeft="50dp">
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Properties List"
+            android:layout_marginLeft="45dp"
+            android:textSize="18dp">
+        </TextView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"
+            android:layout_marginLeft="100dp">
+        </ImageView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fifthLayout"
+        android:layout_below="@+id/fourthLayout"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person"
+            android:layout_marginLeft="50dp">
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FAQ"
+            android:layout_marginLeft="50dp"
+            android:textSize="18dp">
+        </TextView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"
+            android:layout_marginLeft="180dp">
+        </ImageView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sixthLayout"
+        android:layout_below="@+id/fifthLayout"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+
+            android:layout_marginRight="20dp"
+            android:background="#000000" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seventhLayout"
+        android:layout_below="@+id/sixthLayout"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/profileLogoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="160dp"
+            android:text = "LOGOUT"
+            ></Button>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
