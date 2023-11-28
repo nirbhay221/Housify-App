@@ -27,7 +27,7 @@ class RegistrationActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val intent = Intent(this,PhoneAuthActivity::class.java)
+            val intent = Intent(this,NavigationActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -97,7 +97,7 @@ class RegistrationActivity : AppCompatActivity() {
 
                             }
 
-                        val intent = Intent(this,PhoneAuthActivity::class.java)
+                        val intent = Intent(this,NavigationActivity::class.java)
                         startActivity(intent)
                         finish()
 
