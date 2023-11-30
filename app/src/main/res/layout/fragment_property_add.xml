@@ -51,17 +51,25 @@
                 android:hint="Price" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/propertyAddressInfo"
+    <LinearLayout
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Address and Location" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_margin="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/propertyAddressInfo"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:hint="Address and Location" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -89,14 +97,25 @@
             android:layout_height="80dp"
             android:hint="Description" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
-        android:id = "@+id/submitPropertyDetails"
+        android:id="@+id/submitPropertyDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="150dp"
+        android:layout_marginTop="15dp"
         android:text="SUBMIT">
 
     </Button>
+
+    <Button
+        android:id="@+id/getCurrentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:text="Current Location">
+
+    </Button>
+
 
 </LinearLayout>

@@ -50,5 +50,12 @@
             android:id="@+id/propertyUidInfo"
             android:layout_height="wrap_content"
             android:text="Someone"></TextView>
+
     </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/chatWithUser"
+        android:text = "Chat with User"
+        ></Button>
 </LinearLayout>
