@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.findNavController
@@ -39,6 +40,9 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
             holder.itemView.context.startActivity(intent)
 
         }
+        holder.likeButton.setOnClickListener{
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -50,7 +54,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
         val propertyTitle : TextView = itemView.findViewById(R.id.apartmentPostedTitleName)
         val propertyAddress : TextView = itemView.findViewById(R.id.apartmentPostedLocation)
         var viewMoreInfo = itemView.findViewById<TextView>(R.id.viewPostedApartmentInfo)
-
+        var likeButton = itemView.findViewById<ImageView>(R.id.likeButton)
 
 
 

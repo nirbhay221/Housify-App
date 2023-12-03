@@ -1,16 +1,37 @@
 package com.example.housify
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.ContentUris
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.Image
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.DocumentsContract
+import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.BuildConfig
+import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var email:TextInputEditText
@@ -23,6 +44,19 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var headToLogin:Button
     private lateinit var fireStore : FirebaseFirestore
+    private lateinit var userProfileImage:ImageView
+    private lateinit var uploadImageButton:ImageButton
+    private lateinit var cameraCaptureImageButton:ImageButton
+    private lateinit var storage:FirebaseStorage
+    private lateinit var currentPhotoPath:String
+    private var imageUploaded: ImageView? = null
+    private var uri : Uri? =null
+    private var CAMERA_PHOTO= 1
+    private var FOLDER_PHOTO = 2
+    private val CAMERA_CODE_REQ = 10
+
+    private var userImageBase64Converted : String? =null
+    private val UPLOAD_IMAGE_CODE_REQ = 20
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
@@ -45,6 +79,24 @@ class RegistrationActivity : AppCompatActivity() {
         registerButton = findViewById(R.id.registerButton)
         progressBar = findViewById(R.id.progressRegisterBar)
         headToLogin = findViewById(R.id.headToLoginActivity)
+        userProfileImage = findViewById(R.id.userProfileImage)
+        uploadImageButton = findViewById(R.id.imageUploadButton)
+        cameraCaptureImageButton = findViewById(R.id.imageCaptureButton)
+        imageUploaded = findViewById(R.id.userProfileImage)
+
+        cameraCaptureImageButton.setOnClickListener{
+//            capturePhoto()
+            var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(intent,CAMERA_CODE_REQ)
+        }
+        uploadImageButton.setOnClickListener{
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(intent,UPLOAD_IMAGE_CODE_REQ)
+        }
+
+
+
         registerButton.setOnClickListener{
             progressBar.visibility = ProgressBar.VISIBLE
             var enteredEmail = email.text.toString().trim()
@@ -83,10 +135,18 @@ class RegistrationActivity : AppCompatActivity() {
                             "Account created.",
                             Toast.LENGTH_SHORT,
                         ).show()
-                        val user = UserModel(enteredFirstName,enteredLastName,enteredNumber)
+
+                        val user = userImageBase64Converted?.let { it1 ->
+                            UserModel(enteredFirstName,enteredLastName,enteredNumber,
+                                it1
+                            )
+                        }
+
                         val uid = auth.uid
                         if(uid != null){
-                            fireStore.collection("User").document(uid).set(user)
+                            if (user != null) {
+                                fireStore.collection("User").document(uid).set(user)
+                            }
                         }
                         auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
                             Toast.makeText(this,"Please verify your email!", Toast.LENGTH_LONG).show()
@@ -109,6 +169,7 @@ class RegistrationActivity : AppCompatActivity() {
                             "Authentication failed.",
                             Toast.LENGTH_SHORT,
                         ).show()
+                        Log.e("AuthError","Failed",task.exception)
                     }
                 }
 
@@ -122,4 +183,44 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == RESULT_OK){
+            if(requestCode == CAMERA_CODE_REQ){
+                val bitmap = data?.extras?.get("data") as Bitmap?
+                imageUploaded?.setImageBitmap(bitmap)
+
+                userImageBase64Converted = bitmap?.let { encodeBitmapToBase64(it) }
+
+            }
+
+            else if(requestCode == UPLOAD_IMAGE_CODE_REQ){
+                imageUploaded?.setImageURI(data?.data)
+                userImageBase64Converted = data?.data?.let{encodeUriToBase64(it)}
+
+
+            }
+        }
+    }
+
+    private fun encodeUriToBase64(uri: Uri):String {
+        val inputStream = contentResolver.openInputStream(uri)
+        val byteArray = inputStream?.readBytes()
+        return byteArray?.let { Base64.encodeToString(it, Base64.DEFAULT) } ?: ""
+    }
+
+    private fun encodeBitmapToBase64(bitmap: Bitmap):String {
+        var byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray,Base64.DEFAULT)
+    }
 }
+
+
+
+
+
+
+

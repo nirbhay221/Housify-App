@@ -37,6 +37,18 @@ class propertyModel {
             field = value ?: ""
         }
 
+    var userPropertyImages : String?= ""
+        get() = field ?: ""
+        set(value){
+            field = value ?: ""
+        }
+
+    var propertyTotalLikes:Int ?= 0
+        get() = field?: 0
+        set(value){
+            field = value ?:0
+        }
+
 
 
     constructor(
@@ -46,7 +58,8 @@ class propertyModel {
         propertyPasscode: String?,
         propertyPrice: String?,
         propertyDescription: String?,
-        userUid: String?
+        userUid: String?,
+        userPropertyImages:String?
     ) {
         this.propertTitle = propertTitle
         this.propertyType = propertyType
@@ -54,9 +67,18 @@ class propertyModel {
         this.propertyPasscode = propertyPasscode
         this.propertyPrice = propertyPrice
         this.propertyDescription = propertyDescription
-
+        this.userPropertyImages = userPropertyImages
         this.userUid = userUid
     }
-    constructor():this("","","","","","","")
-
+    constructor():this("","","","","","","","")
+    constructor(propertyTitle: String, propertyType: String, propertyAddress: String, propertyPasscode: String, propertyPrice: String, propertyDescription: String, currentUserUid: String)
+    {
+        this.propertTitle = propertTitle
+        this.propertyType = propertyType
+        this.propertyAddress = propertyAddress
+        this.propertyPasscode = propertyPasscode
+        this.propertyPrice = propertyPrice
+        this.propertyDescription = propertyDescription
+        this.userUid = userUid
+    }
 }

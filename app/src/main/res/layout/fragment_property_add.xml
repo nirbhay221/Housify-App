@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -97,7 +102,30 @@
             android:layout_height="80dp"
             android:hint="Description" />
     </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/propertyProfileImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="centerInside"
+        android:cropToPadding="true"
+        android:background="@color/black"
+        android:layout_marginTop="20dp"/>
 
+    <ImageButton
+        android:id="@+id/propertyImageCaptureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Capture Image"
+        android:layout_marginTop="10dp"
+        android:src = "@drawable/ic_camera"/>
+
+    <ImageButton
+        android:id="@+id/propertyImageUploadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        android:layout_marginTop="10dp"
+        android:src = "@drawable/ic_image_upload"/>
     <Button
         android:id="@+id/submitPropertyDetails"
         android:layout_width="wrap_content"
@@ -119,3 +147,4 @@
 
 
 </LinearLayout>
+</ScrollView>

@@ -1,7 +1,10 @@
 package com.example.housify.fragments
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +44,12 @@ class profileFragment: Fragment(R.layout.fragment_profile) {
                     if(document != null) {
                         val firstName = document.getString("firstName")
                         binding.profileUserNameInfo.text = "$firstName"
+                        var userImageBase64 = document.getString("userImage")
+
+                        if(!userImageBase64.isNullOrBlank()){
+                            var decodedImage = decodeBase64ToBitmap(userImageBase64)
+                            binding.userProfileImage.setImageBitmap(decodedImage)
+                        }
                     }
                     else{
                         Log.d("Profile Fragment","User details not found")
@@ -68,6 +77,10 @@ class profileFragment: Fragment(R.layout.fragment_profile) {
             startActivity(intent)
         }
 
+    }
+    private fun decodeBase64ToBitmap(base64:String):Bitmap{
+        var decodeByteArray = Base64.decode(base64,Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decodeByteArray,0,decodeByteArray.size)
     }
 
 }

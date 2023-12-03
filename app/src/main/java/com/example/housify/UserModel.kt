@@ -16,13 +16,25 @@ class UserModel {
         set(value){
             field = value ?: ""
         }
-    constructor():this("","","")
+    var userImage : String?= ""
+        get() = field ?: ""
+        set(value){
+            field = value ?: ""
+        }
+    constructor():this("","","","")
 
-    constructor(firstName:String?,lastName:String?,number:String?){
+    constructor(firstName:String?,lastName:String?,number:String?,userImage:String){
+        this.firstName = firstName
+        this.lastName = lastName
+        this.number = number
+        this.userImage = userImage
+    }
+
+    constructor(enteredFirstName: String, enteredLastName: String, enteredNumber: String)
+    {
         this.firstName = firstName
         this.lastName = lastName
         this.number = number
     }
-
 
 }

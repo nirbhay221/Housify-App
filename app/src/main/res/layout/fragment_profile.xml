@@ -9,14 +9,23 @@
         android:layout_height="195dp"
         android:orientation="vertical"
         android:id ="@+id/firstLayout">
+        <ImageView
+            android:id="@+id/userProfileImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="150dp"
+            android:scaleType="centerInside"
+            android:cropToPadding="true"
+            android:background="@color/black"
+            android:layout_marginTop="20dp">
 
+        </ImageView>
 
         <TextView
             android:id="@+id/profileUserNameInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="180dp"
-            android:layout_marginTop="90dp"
             android:text="Alex"
             android:textSize="20dp"
             android:textStyle="bold"></TextView>

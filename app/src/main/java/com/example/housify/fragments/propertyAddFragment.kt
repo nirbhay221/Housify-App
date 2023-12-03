@@ -2,15 +2,24 @@ package com.example.housify.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapRegionDecoder
 import android.location.Geocoder
+import android.net.Uri
+import android.nfc.Tag
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -28,8 +37,12 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
+import com.google.android.libraries.places.api.Places
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.ByteArrayOutputStream
+import android.util.Base64
+import android.util.Log
 import java.util.Locale
 
 class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
@@ -37,7 +50,76 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
+    private var propertyImage: ImageView?=null
+    private lateinit var propertyImageUploadButton:Button
+    private lateinit var propertyImageCameraButton:Button
+    private var uri : Uri? = null
+    private var CAMERA_PHOTO = 1
+    private var FOLDER_PHOTO = 2
+    private val CAMERA_CODE_REQ = 10
+    private var propertyImageBase64Converted: String ?= null
+    private val UPLOAD_IMAGE_CODE_REQ = 20
+    val cameraActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            val data: Intent ?= result.data
+            handleImageResult(data)
+        }
+    }
+    val galleryActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            val data: Intent ?= result.data
+            handleGalleryImageResult(data)
+        }
+    }
+    fun handleImageResult(data:Intent?){
+        if(data!= null){
+            if(data.data != null){
+                uri = data.data
+            }
+            else if(data.extras?.get("data") != null){
+                val bitmap = data.extras?.get("data") as Bitmap?
+                binding.propertyProfileImage?.setImageBitmap(bitmap)
+                propertyImageBase64Converted = bitmap?.let{
+                    encodeBitmapToBase64(it)
+                }
 
+            }
+        }
+    }
+    fun handleGalleryImageResult(data:Intent?){
+        if(data!= null){
+            if(data.data != null){
+                uri = data.data
+                binding.propertyProfileImage?.setImageURI(uri)
+                propertyImageBase64Converted = uri?.let{
+                    encodeUriToBase64(it)
+                }
+
+            }
+        }
+    }
+
+    fun encodeUriToBase64(uri: Uri): String {
+        try {
+            val inputStream = requireContext().contentResolver.openInputStream(uri)
+            val byteArray = inputStream?.readBytes()
+            return byteArray?.let { Base64.encodeToString(it, Base64.DEFAULT) } ?: ""
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(requireContext(),"${e}",Toast.LENGTH_LONG).show()
+            return ""
+        }
+    }
+
+    private fun encodeBitmapToBase64(it: Bitmap):String {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        it.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(byteArray,Base64.DEFAULT)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,12 +127,14 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPropertyAddBinding.inflate(inflater)
+
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         locationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -67,6 +151,18 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
                 fusedLocationClient.removeLocationUpdates(locationCallback)
             }
         }
+        binding.propertyImageCaptureButton.setOnClickListener{
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            cameraActivityResult.launch(intent)
+        }
+        binding.propertyImageUploadButton.setOnClickListener{
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            galleryActivityResult.launch(intent)
+        }
+
+
+
 
 
         val propertyTypes = arrayOf("House", "Apartment", "Condo", "Other")
