@@ -26,12 +26,12 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
 
     override fun onBindViewHolder(holder: propertyPostedAdapter.MyViewHolder, position: Int) {
         val property: propertyModel = propertyList[position]
-        holder.propertyTitle.text = property.propertTitle
+        holder.propertyTitle.text = property.propertyTitle
         holder.propertyAddress.text = property.propertyAddress
 
         holder.viewMoreInfo.setOnClickListener{
             val bundle = Bundle()
-            bundle.putString("propertyName", property.propertTitle)
+            bundle.putString("propertyName", property.propertyTitle)
             bundle.putString("propertyLocation", property.propertyAddress)
 
             bundle.putString("propertyUid", property.userUid)

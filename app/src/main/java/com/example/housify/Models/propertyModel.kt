@@ -1,7 +1,7 @@
 package com.example.housify.Models
 
 class propertyModel {
-    var propertTitle : String? = ""
+    var propertyTitle : String? = ""
         get() = field ?: ""
         set(value){
             field = value ?: ""
@@ -52,7 +52,7 @@ class propertyModel {
 
 
     constructor(
-        propertTitle: String?,
+        propertyTitle: String?,
         propertyType: String?,
         propertyAddress: String?,
         propertyPasscode: String?,
@@ -61,7 +61,7 @@ class propertyModel {
         userUid: String?,
         userPropertyImages:String?
     ) {
-        this.propertTitle = propertTitle
+        this.propertyTitle = propertyTitle
         this.propertyType = propertyType
         this.propertyAddress = propertyAddress
         this.propertyPasscode = propertyPasscode
@@ -73,7 +73,7 @@ class propertyModel {
     constructor():this("","","","","","","","")
     constructor(propertyTitle: String, propertyType: String, propertyAddress: String, propertyPasscode: String, propertyPrice: String, propertyDescription: String, currentUserUid: String)
     {
-        this.propertTitle = propertTitle
+        this.propertyTitle = propertyTitle
         this.propertyType = propertyType
         this.propertyAddress = propertyAddress
         this.propertyPasscode = propertyPasscode

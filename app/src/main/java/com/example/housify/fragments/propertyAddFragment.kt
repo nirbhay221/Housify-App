@@ -88,19 +88,28 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
             }
         }
     }
-    fun handleGalleryImageResult(data:Intent?){
-        if(data!= null){
-            if(data.data != null){
-                uri = data.data
-                binding.propertyProfileImage?.setImageURI(uri)
-                propertyImageBase64Converted = uri?.let{
-                    encodeUriToBase64(it)
+    fun handleGalleryImageResult(data: Intent?) {
+        if (data != null) {
+            if (data.clipData != null) {
+                for (i in 0 until data.clipData!!.itemCount) {
+                    val uri = data.clipData!!.getItemAt(i).uri
+                    handleGalleryImage(uri)
                 }
-
+            } else if (data.data != null) {
+                val uri = data.data
+                handleGalleryImage(uri)
             }
         }
     }
 
+    fun handleGalleryImage(uri: Uri?) {
+        if (uri != null) {
+            binding.propertyProfileImage?.setImageURI(uri)
+            propertyImageBase64Converted = uri.let {
+                encodeUriToBase64(it)
+            }
+        }
+    }
     fun encodeUriToBase64(uri: Uri): String {
         try {
             val inputStream = requireContext().contentResolver.openInputStream(uri)
@@ -158,6 +167,7 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
         binding.propertyImageUploadButton.setOnClickListener{
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             galleryActivityResult.launch(intent)
         }
 
