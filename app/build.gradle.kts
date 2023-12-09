@@ -8,6 +8,10 @@ android {
     namespace = "com.example.housify"
     compileSdk = 34
 
+    packagingOptions {
+        jniLibs.pickFirsts.add("lib/**/libc++_shared.so")
+    }
+
     defaultConfig {
         applicationId = "com.example.housify"
         minSdk = 24
@@ -36,7 +40,12 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+    buildTypes.configureEach {
+        buildConfigField("String", "TOMTOM_API_KEY", "\"eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8\"")
+    }
+
 }
 
 dependencies {
@@ -66,5 +75,10 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:1.3.0")
     implementation("androidx.camera:camera-viewfinder:1.4.0-alpha02")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+
+
+    val version = "0.40.0"
+    implementation("com.tomtom.sdk.maps:map-display:$version")
+    implementation("com.tomtom.sdk.search:search-online:0.40.0")
 
 }

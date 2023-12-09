@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+
 import android.graphics.BitmapRegionDecoder
 import android.location.Geocoder
 import android.net.Uri
@@ -14,6 +15,7 @@ import android.nfc.Tag
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +45,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.io.ByteArrayOutputStream
 import android.util.Base64
 import android.util.Log
+import com.google.firebase.firestore.GeoPoint
+import com.tomtom.quantity.Distance
+import com.tomtom.sdk.search.autocomplete.AutocompleteCallback
+import com.tomtom.sdk.search.autocomplete.AutocompleteOptions
+import com.tomtom.sdk.search.autocomplete.AutocompleteResponse
+import com.tomtom.sdk.search.common.error.SearchFailure
+import com.tomtom.sdk.search.model.result.AutocompleteResult
+import com.tomtom.sdk.search.model.result.AutocompleteSegmentPoiCategory
+import com.tomtom.sdk.search.online.OnlineSearch
 import java.util.Locale
 
 class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
@@ -59,6 +70,7 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
     private val CAMERA_CODE_REQ = 10
     private var propertyImageBase64Converted: String ?= null
     private val UPLOAD_IMAGE_CODE_REQ = 20
+    private lateinit var searchApi: OnlineSearch
     val cameraActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result ->
         if(result.resultCode == Activity.RESULT_OK){
@@ -143,7 +155,54 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val searchApi = context?.let { OnlineSearch.create(it, "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8") }
+        val autoCompleteCallback = object :AutocompleteCallback{
+            override fun onSuccess(result: AutocompleteResponse) {
+                val predictionResult: List<AutocompleteResult>  = result.results
+                Toast.makeText(requireContext(),"$predictionResult",Toast.LENGTH_LONG).show()
+            }
 
+            override fun onFailure(failure: SearchFailure) {
+                Log.e("AutocompleteFailure", "Error: $failure")
+            }
+        }
+        binding.propertyAddressInfo.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val querySearch  =  p0.toString()
+                val amsterdam = com.tomtom.sdk.location.GeoPoint(52.379189,4.899431)
+                val autoCompleteOptions = com.tomtom.sdk.search.autocomplete.AutocompleteOptions(
+                    query = querySearch,
+                    locale = Locale("en","US"),
+                    position = amsterdam,
+                    radius = Distance.meters(555600000 )
+                )
+                searchApi?.autocompleteSearch(autoCompleteOptions,object:AutocompleteCallback{
+                    override fun onSuccess(result: AutocompleteResponse) {
+                        val predictionResult: List<AutocompleteResult> = result.results
+                        val firstPrediction = predictionResult[0]
+                        val predictedAddress = firstPrediction.segments.firstOrNull{
+                            it is AutocompleteSegmentPoiCategory
+                        } as AutocompleteSegmentPoiCategory?
+                        val address = predictedAddress?.poiCategory?.name?:"No Suggestions"
+                        Toast.makeText(requireContext(),"$address",Toast.LENGTH_LONG).show()
+                        Log.e("AutoComplete Result", "Result Success : $predictionResult")
+                    }
+
+                    override fun onFailure(failure: SearchFailure) {
+                        Log.e("AutoComplete Failure", "Error: $failure")
+                    }
+                })
+                Toast.makeText(requireContext(),"Text Changed",Toast.LENGTH_LONG).show()
+            }
+        })
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         locationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -170,11 +229,6 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             galleryActivityResult.launch(intent)
         }
-
-
-
-
-
         val propertyTypes = arrayOf("House", "Apartment", "Condo", "Other")
         val spinnerAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, propertyTypes)

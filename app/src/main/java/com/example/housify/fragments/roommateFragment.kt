@@ -1,0 +1,28 @@
+package com.example.housify.fragments
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.housify.R
+import com.example.housify.databinding.FragmentExpensesBinding
+import com.example.housify.databinding.FragmentRoommatesBinding
+
+class roommateFragment: Fragment(R.layout.fragment_roommates) {
+    private lateinit var binding: FragmentRoommatesBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentRoommatesBinding.inflate(inflater)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+    }

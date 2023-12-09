@@ -60,19 +60,19 @@
             android:paddingEnd="5dp"
             android:gravity="center"
             android:layout_weight="1">
+
             <ImageView
-                android:id = "@+id/favoriteImage"
-                android:layout_width="20dp"
+                android:id="@+id/favoriteImage"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src= "@drawable/favorite">
-            </ImageView>
+                android:src="@drawable/favorite"></ImageView>
             <TextView
                 android:id = "@+id/favoriteTxt"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Like"
+                android:text="Roommates"
                 android:textStyle="bold"
                 android:textColor="@color/Like"
                 android:layout_marginStart="10dp"

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 import com.example.housify.fragments.FavoritePropertySelectedFragment
 import com.example.housify.fragments.chatFragment
+import com.example.housify.fragments.expensesAndTasksDivisionFragment
 import com.example.housify.fragments.homeFragment
 import com.example.housify.fragments.profileFragment
 import com.example.housify.viewModels.HomeViewModel
@@ -249,7 +250,7 @@ class NavigationActivity : AppCompatActivity() {
                 scaleAnim.fillAfter = true
                 favoriteLayout.startAnimation(scaleAnim)
                 viewModel.selectedTab = 2
-                fragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainer,FavoritePropertySelectedFragment::class.java,null).commit()
+                fragmentManager.beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentContainer,expensesAndTasksDivisionFragment::class.java,null).commit()
 
 
             }
