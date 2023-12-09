@@ -39,66 +39,21 @@ class transactionModel {
 
 
     constructor(
-        propertyTitle: String?,
-        propertyType: String?,
-        propertyAddress: String?,
-        propertyPasscode: String?,
-        propertyPrice: String?,
-        propertyDescription: String?,
-        userUid: String?,
-        userPropertyImages:String?,
-        propertyTotalLikes : Int?
+        transactionId: String?,
+        transactionTitle: String?,
+        transactionType: String?,
+        transactionAmount: String?,
+        transactionTime: String?,
+        toUser: String?,
     ) {
-        this.propertyTitle = propertyTitle
-        this.propertyType = propertyType
-        this.propertyAddress = propertyAddress
-        this.propertyPasscode = propertyPasscode
-        this.propertyPrice = propertyPrice
-        this.propertyDescription = propertyDescription
-        this.userPropertyImages = userPropertyImages
-        this.userUid = userUid
-        this.propertyTotalLikes = propertyTotalLikes
+        this.transactionId = transactionId
+        this.transactionTitle = transactionTitle
+        this.transactionType = transactionType
+        this.transactionAmount = transactionAmount
+        this.transactionTime = transactionTime
+        this.fromUser = fromUser
+        this.toUser = toUser
     }
-    constructor(
-        propertyTitle: String?,
-        propertyType: String?,
-        propertyAddress: String?,
-        propertyPasscode: String?,
-        propertyPrice: String?,
-        propertyDescription: String?,
-        userUid: String?,
-        userPropertyImages:String?
-    ) {
-        this.propertyTitle = propertyTitle
-        this.propertyType = propertyType
-        this.propertyAddress = propertyAddress
-        this.propertyPasscode = propertyPasscode
-        this.propertyPrice = propertyPrice
-        this.propertyDescription = propertyDescription
-        this.userPropertyImages = userPropertyImages
-        this.userUid = userUid
-    }
-    constructor():this("","","","","","","","")
-    constructor(propertyTitle: String, propertyType: String, propertyAddress: String, propertyPasscode: String, propertyPrice: String, propertyDescription: String, currentUserUid: String)
-    {
-        this.propertyTitle = propertyTitle
-        this.propertyType = propertyType
-        this.propertyAddress = propertyAddress
-        this.propertyPasscode = propertyPasscode
-        this.propertyPrice = propertyPrice
-        this.propertyDescription = propertyDescription
-        this.userUid = currentUserUid
-    }
-    constructor(propertyTitle: String, propertyType: String, propertyAddress: String, propertyPasscode: String, propertyPrice: String, propertyDescription: String, currentUserUid: String,propertyTotalLikes: Int?,propertyUid:String)
-    {
-        this.propertyTitle = propertyTitle
-        this.propertyType = propertyType
-        this.propertyAddress = propertyAddress
-        this.propertyPasscode = propertyPasscode
-        this.propertyPrice = propertyPrice
-        this.propertyDescription = propertyDescription
-        this.userUid = currentUserUid
-        this.propertyTotalLikes = propertyTotalLikes
-        this.propertyUid = propertyUid
-    }
+    constructor():this("","","","","","","")
+    
 }
