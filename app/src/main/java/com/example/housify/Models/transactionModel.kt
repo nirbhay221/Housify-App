@@ -44,6 +44,7 @@ class transactionModel {
         transactionType: String?,
         transactionAmount: String?,
         transactionTime: String?,
+        fromUser: String?,
         toUser: String?,
     ) {
         this.transactionId = transactionId
@@ -55,5 +56,20 @@ class transactionModel {
         this.toUser = toUser
     }
     constructor():this("","","","","","","")
-    
+    constructor(transactionId: String,
+                transactionTitle: String,
+                transactionType: String,
+                transactionAmount: String,
+                transactionTime: String,
+                fromUser: String,
+                toUser: String?)
+    {
+        this.transactionId = transactionId
+        this.transactionTitle = transactionTitle
+        this.transactionType = transactionType
+        this.transactionAmount = transactionAmount
+        this.transactionTime = transactionTime
+        this.fromUser = fromUser
+        this.toUser = toUser
+    }
 }
