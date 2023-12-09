@@ -205,6 +205,7 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
             val propertyDescription = binding.propertyDescriptionInfo.text.toString()
 
             val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
+            Toast.makeText(requireContext(),"$currentUserUid",Toast.LENGTH_LONG).show()
 
             if (currentUserUid != null && propertyTitle.isNotEmpty() && propertyType.isNotEmpty() &&
                 propertyPrice.isNotEmpty() && propertyAddress.isNotEmpty() &&
@@ -225,9 +226,36 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
 
                 propertiesCollection.add(propertyData)
                     .addOnSuccessListener { documentReference ->
-                        Toast.makeText(requireContext(), "PropertyAdded", Toast.LENGTH_LONG).show()
-                        findNavController().navigate(R.id.propertyViewFragment)
-
+                        var generatedUid = documentReference.id
+                        propertyData.propertyUid = generatedUid
+                        documentReference.update("propertyUid",generatedUid).addOnSuccessListener {
+                            Toast.makeText(requireContext(), "PropertyAdded", Toast.LENGTH_LONG).show()
+                            findNavController().navigate(R.id.propertyViewFragment)
+                        }.addOnFailureListener {
+                            Toast.makeText(
+                                requireContext(),
+                                "PropertyAdd Failure",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            documentReference.update(
+                                "userUid",
+                                FirebaseAuth.getInstance().currentUser?.uid
+                            ).addOnSuccessListener {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "PropertyUserUidAdded",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }.addOnFailureListener {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "PropertyAdd Failure",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                            Toast.makeText(requireContext(), "PropertyAdded", Toast.LENGTH_LONG)
+                                .show()
+                        }
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(

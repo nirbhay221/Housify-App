@@ -42,6 +42,11 @@ class propertyModel {
         set(value){
             field = value ?: ""
         }
+    var propertyUid : String?= ""
+        get() = field ?: ""
+        set(value){
+            field = value ?: ""
+        }
 
     var propertyTotalLikes:Int ?= 0
         get() = field?: 0
@@ -50,7 +55,27 @@ class propertyModel {
         }
 
 
-
+    constructor(
+        propertyTitle: String?,
+        propertyType: String?,
+        propertyAddress: String?,
+        propertyPasscode: String?,
+        propertyPrice: String?,
+        propertyDescription: String?,
+        userUid: String?,
+        userPropertyImages:String?,
+        propertyTotalLikes : Int?
+    ) {
+        this.propertyTitle = propertyTitle
+        this.propertyType = propertyType
+        this.propertyAddress = propertyAddress
+        this.propertyPasscode = propertyPasscode
+        this.propertyPrice = propertyPrice
+        this.propertyDescription = propertyDescription
+        this.userPropertyImages = userPropertyImages
+        this.userUid = userUid
+        this.propertyTotalLikes = propertyTotalLikes
+    }
     constructor(
         propertyTitle: String?,
         propertyType: String?,
@@ -79,6 +104,19 @@ class propertyModel {
         this.propertyPasscode = propertyPasscode
         this.propertyPrice = propertyPrice
         this.propertyDescription = propertyDescription
-        this.userUid = userUid
+        this.userUid = currentUserUid
     }
+    constructor(propertyTitle: String, propertyType: String, propertyAddress: String, propertyPasscode: String, propertyPrice: String, propertyDescription: String, currentUserUid: String,propertyTotalLikes: Int?,propertyUid:String)
+    {
+        this.propertyTitle = propertyTitle
+        this.propertyType = propertyType
+        this.propertyAddress = propertyAddress
+        this.propertyPasscode = propertyPasscode
+        this.propertyPrice = propertyPrice
+        this.propertyDescription = propertyDescription
+        this.userUid = currentUserUid
+        this.propertyTotalLikes = propertyTotalLikes
+        this.propertyUid = propertyUid
+    }
+
 }

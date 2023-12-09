@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.housify.LoginActivity
 import com.example.housify.Models.propertyModel
 import com.example.housify.R
 import com.example.housify.propertyInfoActivity
@@ -19,28 +16,34 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
-class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>): RecyclerView.Adapter<propertyPostedAdapter.MyViewHolder>() {
+class propertyLikedFilterAdapter (private val propertyList: ArrayList<propertyModel>): RecyclerView.Adapter<propertyLikedFilterAdapter.MyPropertyLikedViewHolder>() {
 
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private var isPropertyLiked:Boolean = false
+    private var isPropertyLiked: Boolean = false
 
-    var currentUserUid =auth.currentUser?.uid
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): propertyPostedAdapter.MyViewHolder {
+    var currentUserUid = auth.currentUser?.uid
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): propertyLikedFilterAdapter.MyPropertyLikedViewHolder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.property_posted_item_view,parent,false)
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.property_posted_item_view, parent, false)
 
-        return MyViewHolder(itemView)
+        return MyPropertyLikedViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: propertyPostedAdapter.MyViewHolder, position: Int) {
+
+    override fun onBindViewHolder(holder: propertyLikedFilterAdapter.MyPropertyLikedViewHolder, position: Int) {
         val property: propertyModel = propertyList[position]
         if (currentUserUid != null) {
 
             firestore.collection("User").document(currentUserUid!!).get()
                 .addOnSuccessListener { documentSnapshot ->
-                    val likedProperties = documentSnapshot["likedProperties"] as? List<String> ?: emptyList()
+                    val likedProperties =
+                        documentSnapshot["likedProperties"] as? List<String> ?: emptyList()
                     isPropertyLiked = likedProperties.contains(property.propertyUid)
                 }
                 .addOnFailureListener {
@@ -49,7 +52,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
         }
         holder.propertyTitle.text = property.propertyTitle
         holder.propertyAddress.text = property.propertyAddress
-        holder.propertyTitle.setOnClickListener{
+        holder.propertyTitle.setOnClickListener {
             holder.propertyTitle.text = property.userUid
         }
         val currentUserUid = auth.currentUser?.uid
@@ -64,7 +67,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
 //        }
 
 
-        holder.viewMoreInfo.setOnClickListener{
+        holder.viewMoreInfo.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("propertyName", property.propertyTitle)
             bundle.putString("propertyLocation", property.propertyAddress)
@@ -77,20 +80,21 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
         }
 
 
-        holder.likeButton.setOnClickListener{
+        holder.likeButton.setOnClickListener {
             if (currentUserUid != null) {
 
                 firestore.collection("User").document(currentUserUid).get()
                     .addOnSuccessListener { documentSnapshot ->
-                        val likedProperties = documentSnapshot["likedProperties"] as? List<String> ?: emptyList()
+                        val likedProperties =
+                            documentSnapshot["likedProperties"] as? List<String> ?: emptyList()
                         isPropertyLiked = likedProperties.contains(property.propertyUid)
-                              }
+                    }
                     .addOnFailureListener {
 
                     }
             }
-            Toast.makeText(holder.itemView.context,"$isPropertyLiked",Toast.LENGTH_LONG).show()
-            if(!isPropertyLiked){
+            Toast.makeText(holder.itemView.context, "$isPropertyLiked", Toast.LENGTH_LONG).show()
+            if (!isPropertyLiked) {
                 var currentUserId = auth.currentUser?.uid
                 property.propertyTotalLikes = property.propertyTotalLikes?.plus(1)
                 property.propertyUid?.let { it1 ->
@@ -114,17 +118,17 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
                 if (currentUserId != null) {
                     //firestore.collection("User").document(currentUserId).update("likedProperties",)
                 }
-            }
-            else{
+            } else {
                 var currentUserId = auth.currentUser?.uid
                 property.propertyTotalLikes = property.propertyTotalLikes?.minus(1)
                 property.propertyUid?.let { it1 ->
-                    firestore.collection("Properties").document(it1).update("propertyTotalLikes", property.propertyTotalLikes)
+                    firestore.collection("Properties").document(it1)
+                        .update("propertyTotalLikes", property.propertyTotalLikes)
                         .addOnSuccessListener {
                             auth.currentUser?.uid.let { userUid ->
                                 if (userUid != null) {
-                                    firestore.collection("User").
-                                    document(userUid).update("likedProperties", FieldValue.arrayRemove(it1))
+                                    firestore.collection("User").document(userUid)
+                                        .update("likedProperties", FieldValue.arrayRemove(it1))
                                         .addOnSuccessListener {
                                             isPropertyLiked = false
                                         }
@@ -144,15 +148,14 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
         return propertyList.size
     }
 
-    public class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    public class MyPropertyLikedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val propertyTitle : TextView = itemView.findViewById(R.id.apartmentPostedTitleName)
-        val propertyAddress : TextView = itemView.findViewById(R.id.apartmentPostedLocation)
+        val propertyTitle: TextView = itemView.findViewById(R.id.apartmentPostedTitleName)
+        val propertyAddress: TextView = itemView.findViewById(R.id.apartmentPostedLocation)
         var viewMoreInfo = itemView.findViewById<TextView>(R.id.viewPostedApartmentInfo)
         var likeButton = itemView.findViewById<ImageView>(R.id.likeButton)
 
 
-
-        }
-
     }
+}
+

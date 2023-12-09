@@ -10,17 +10,21 @@ import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TableLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import com.example.housify.Adapter.HomeFragmentDivisionAdapter
 import com.example.housify.Adapter.propertyListAdapter
 import com.example.housify.Adapter.propertyPostedAdapter
 import com.example.housify.Models.propertyModel
 import com.example.housify.R
 import com.example.housify.databinding.FragmentHomeBinding
 import com.example.housify.databinding.FragmentPropertyAddBinding
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,6 +38,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var propertyArrayList: ArrayList<propertyModel>
     private lateinit var PropertyPostedAdapter : propertyPostedAdapter
     private lateinit var fireStore: FirebaseFirestore
+    private lateinit var homeFragmentDivisionAdapter: HomeFragmentDivisionAdapter
+    private lateinit var nearbyProperties: nearbyPropertiesFragment
+    private lateinit var popularProperties:popularPropertiesFragment
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,20 +54,44 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        nearbyProperties =nearbyPropertiesFragment()
+        popularProperties = popularPropertiesFragment()
+        setupViewPager(binding.viewPagerHome)
+        binding.tabLayoutHome.setupWithViewPager(binding.viewPagerHome)
+        binding.tabLayoutHome.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+            }
 
-        recyclerView = binding.propertyPostedRetrieveList
-        recyclerView.layoutManager= LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        recyclerView.setHasFixedSize(true)
-        propertyArrayList= arrayListOf()
-        PropertyPostedAdapter= propertyPostedAdapter(propertyArrayList)
-        recyclerView.adapter = PropertyPostedAdapter
-        binding.propertyPostedRetrieveList
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
 
 
-        EventChangeListener()
+//        recyclerView = binding.propertyPostedRetrieveList
+//        recyclerView.layoutManager= LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+//        recyclerView.setHasFixedSize(true)
+//        propertyArrayList= arrayListOf()
+//        PropertyPostedAdapter= propertyPostedAdapter(propertyArrayList)
+//        recyclerView.adapter = PropertyPostedAdapter
+//        binding.propertyPostedRetrieveList
+//
+//
+//        EventChangeListener()
 
 
     }
+
+    private fun setupViewPager(viewPager: ViewPager) {
+
+        homeFragmentDivisionAdapter = HomeFragmentDivisionAdapter(childFragmentManager)
+        homeFragmentDivisionAdapter.addFragment(nearbyProperties, "Nearby")
+        homeFragmentDivisionAdapter.addFragment(popularProperties, "Popular")
+        viewPager.adapter = homeFragmentDivisionAdapter
+    }
+
     private fun EventChangeListener() {
         fireStore = FirebaseFirestore.getInstance()
         fireStore.collection("Properties").addSnapshotListener(object :
