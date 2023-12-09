@@ -41,7 +41,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var homeFragmentDivisionAdapter: HomeFragmentDivisionAdapter
     private lateinit var nearbyProperties: nearbyPropertiesFragment
     private lateinit var popularProperties:popularPropertiesFragment
-
+    private lateinit var allProperties:allPropertiesPostedFragment
+    private lateinit var likedProperties: FavoritePropertySelectedFragment
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,8 +55,10 @@ class homeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        nearbyProperties =nearbyPropertiesFragment()
+        nearbyProperties = nearbyPropertiesFragment()
         popularProperties = popularPropertiesFragment()
+        allProperties = allPropertiesPostedFragment()
+        likedProperties = FavoritePropertySelectedFragment()
         setupViewPager(binding.viewPagerHome)
         binding.tabLayoutHome.setupWithViewPager(binding.viewPagerHome)
         binding.tabLayoutHome.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -87,8 +90,10 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private fun setupViewPager(viewPager: ViewPager) {
 
         homeFragmentDivisionAdapter = HomeFragmentDivisionAdapter(childFragmentManager)
+        homeFragmentDivisionAdapter.addFragment(allProperties, "All")
         homeFragmentDivisionAdapter.addFragment(nearbyProperties, "Nearby")
         homeFragmentDivisionAdapter.addFragment(popularProperties, "Popular")
+        homeFragmentDivisionAdapter.addFragment(likedProperties, "Liked")
         viewPager.adapter = homeFragmentDivisionAdapter
     }
 
