@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
@@ -61,7 +61,7 @@
                         android:layout_height="24dp"
                         android:src="@drawable/ic_like"
                         android:contentDescription="Like Button"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="230dp"
                         android:layout_marginTop="30dp"
                         android:clickable="true"
                         android:focusable="true"/>
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:text = "Active Price"
                     android:textSize="13dp"
-                    android:layout_marginLeft="200dp"
+                    android:layout_marginLeft="190dp"
                     android:textStyle="bold">
 
                 </TextView>
