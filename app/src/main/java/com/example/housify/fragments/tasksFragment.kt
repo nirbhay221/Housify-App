@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.housify.Models.TaskModel
-import com.example.housify.Models.UserTaskAssignment
 import com.example.housify.R
 import com.example.housify.UserModel
 import com.example.housify.databinding.FragmentExpensesBinding
@@ -45,7 +44,7 @@ class tasksFragment : Fragment(R.layout.fragment_tasks) {
             var taskTitle = binding.taskTitleEditText.text.toString().trim()
             var taskDescription = binding.taskDescriptionEditText.text.toString().trim()
             var taskDeadline = binding.taskDeadlineEditText.text.toString().trim()
-
+            var taskId = firestore.generateUniqueId()
             if(currentUserUid != null && taskTitle.isNotEmpty() && taskDescription.isNotEmpty() && taskDeadline.isNotEmpty()){
                 firestore.collection("Roommate")
                     .get()
@@ -65,7 +64,7 @@ class tasksFragment : Fragment(R.layout.fragment_tasks) {
                                         val roommateGroupId = document.getString("roommateGroupId")
                                         val roommateGroupName = document.getString("roommateGroupName")
                                         if(roommateGroupId != null){
-                                            var task = TaskModel(null,taskTitle,taskDescription,taskDeadline,null)
+                                            var task = TaskModel(taskId,taskTitle,taskDescription,taskDeadline)
                                             Toast.makeText(requireContext(), "Title: $taskTitle, Description: $taskDescription, Deadline: $taskDeadline", Toast.LENGTH_LONG).show()
 
                                             firestore.collection("Roommate").document(roommateGroupId)
@@ -98,6 +97,9 @@ class tasksFragment : Fragment(R.layout.fragment_tasks) {
             }
 
         }
+    fun FirebaseFirestore.generateUniqueId():String{
+        return this.collection("dummyCollection").document().id
+    }
 //        if(currentUserUid != null){
 //            firestore.collection("Roommate")
 //                .get()

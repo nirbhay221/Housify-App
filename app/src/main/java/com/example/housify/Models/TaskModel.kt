@@ -27,7 +27,7 @@ class TaskModel {
             field = value ?: ""
         }
 
-    var assignedUsers: MutableList<UserTaskAssignment> = mutableListOf()
+//    var assignedUsers: MutableList<UserTaskAssignment> = mutableListOf()
 
     var assignedToCurrentUser: Boolean = false
     constructor()
@@ -36,14 +36,14 @@ class TaskModel {
         taskTitle: String?,
         taskDescription: String?,
         taskDeadline: String?,
-        assignedUsers: MutableList<UserTaskAssignment>,
-        assignedToCurrentUser: Boolean
+//        assignedUsers: MutableList<UserTaskAssignment>,
+//        assignedToCurrentUser: Boolean
     ) {
         this.taskId = taskId
         this.taskTitle = taskTitle
         this.taskDescription = taskDescription
         this.taskDeadline = taskDeadline
-        this.assignedUsers = assignedUsers
+//        this.assignedUsers = assignedUsers
         this.assignedToCurrentUser = assignedToCurrentUser
     }
     constructor(
@@ -55,11 +55,10 @@ class TaskModel {
         this.taskDescription = taskDescription
         this.taskDeadline = taskDeadline
     }
-    constructor(nothing: Nothing?, taskTitle: String, taskDescription: String, taskDeadline: String, nothing1: Nothing?)
 
 }
-class UserTaskAssignment(
-    var user: UserModel? = null,
-    var scheduledCompletionTime: String? = ""
-
-)
+//class UserTaskAssignment(
+//    var user: UserModel? = null,
+//    var scheduledCompletionTime: String? = ""
+//
+//)
