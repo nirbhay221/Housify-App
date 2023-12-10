@@ -122,24 +122,23 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
             }
         }
     }
-    fun encodeUriToBase64(uri: Uri): String {
+    private fun encodeUriToBase64(uri: Uri): String {
         try {
             val inputStream = requireContext().contentResolver.openInputStream(uri)
             val byteArray = inputStream?.readBytes()
             return byteArray?.let { Base64.encodeToString(it, Base64.DEFAULT) } ?: ""
         } catch (e: Exception) {
             e.printStackTrace()
-            Toast.makeText(requireContext(),"${e}",Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "${e}", Toast.LENGTH_LONG).show()
             return ""
         }
     }
 
-    private fun encodeBitmapToBase64(it: Bitmap):String {
+    private fun encodeBitmapToBase64(it: Bitmap): String {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        it.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream)
+        it.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray,Base64.DEFAULT)
-
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
 
     override fun onCreateView(
@@ -274,6 +273,10 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
                     propertyDescription,
                     currentUserUid
                 )
+
+                if (propertyImageBase64Converted != null) {
+                    propertyData.userPropertyImages = propertyImageBase64Converted
+                }
 
                 val propertiesCollection =
                     FirebaseFirestore.getInstance().collection("Properties")
