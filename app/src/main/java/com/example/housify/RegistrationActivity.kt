@@ -136,13 +136,13 @@ class RegistrationActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT,
                         ).show()
 
+                        val uid = auth.uid
                         val user = userImageBase64Converted?.let { it1 ->
-                            UserModel(enteredFirstName,enteredLastName,enteredNumber,
+                            UserModel(uid,enteredFirstName,enteredLastName,enteredNumber,
                                 it1
                             )
                         }
 
-                        val uid = auth.uid
                         if(uid != null){
                             if (user != null) {
                                 fireStore.collection("User").document(uid).set(user)
