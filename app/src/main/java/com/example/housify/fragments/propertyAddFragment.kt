@@ -85,18 +85,22 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
             handleGalleryImageResult(data)
         }
     }
-    fun handleImageResult(data:Intent?){
-        if(data!= null){
-            if(data.data != null){
+    fun handleImageResult(data: Intent?) {
+        if (data != null) {
+            if (data.data != null) {
                 uri = data.data
-            }
-            else if(data.extras?.get("data") != null){
+            } else if (data.extras?.get("data") != null) {
                 val bitmap = data.extras?.get("data") as Bitmap?
-                binding.propertyProfileImage?.setImageBitmap(bitmap)
-                propertyImageBase64Converted = bitmap?.let{
+
+                val imageView = if (binding.propertyProfileImage?.drawable == null) {
+                    binding.propertyProfileImage
+                } else {
+                    binding.propertyProfileImage2
+                }
+                imageView?.setImageBitmap(bitmap)
+                propertyImageBase64Converted = bitmap?.let {
                     encodeBitmapToBase64(it)
                 }
-
             }
         }
     }
@@ -116,7 +120,13 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
 
     fun handleGalleryImage(uri: Uri?) {
         if (uri != null) {
-            binding.propertyProfileImage?.setImageURI(uri)
+            val imageView = if (binding.propertyProfileImage?.drawable == null) {
+                binding.propertyProfileImage
+            } else {
+                binding.propertyProfileImage2
+            }
+
+            imageView?.setImageURI(uri)
             propertyImageBase64Converted = uri.let {
                 encodeUriToBase64(it)
             }
