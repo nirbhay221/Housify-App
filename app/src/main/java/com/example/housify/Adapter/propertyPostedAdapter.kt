@@ -51,6 +51,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
         }
         holder.propertyTitle.text = property.propertyTitle
         holder.propertyAddress.text = property.propertyAddress
+        holder.propertyPrice.text ="$ "+ property.propertyPrice
         holder.propertyTitle.setOnClickListener{
             holder.propertyTitle.text = property.userUid
         }
@@ -158,6 +159,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
 
         val propertyTitle : TextView = itemView.findViewById(R.id.apartmentPostedTitleName)
         val propertyAddress : TextView = itemView.findViewById(R.id.apartmentPostedLocation)
+        val propertyPrice : TextView = itemView.findViewById(R.id.propertyPostedApartmentPrice)
         var viewMoreInfo = itemView.findViewById<TextView>(R.id.viewPostedApartmentInfo)
         var likeButton = itemView.findViewById<ImageView>(R.id.likeButton)
         val propertyImage: ImageView = itemView.findViewById(R.id.propertyPostedImage)
