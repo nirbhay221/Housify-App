@@ -94,6 +94,7 @@
 
                 </TextView>
                 <TextView
+                    android:id="@+id/propertyViewPostedApartmentPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text = "Active Price"
@@ -103,7 +104,16 @@
 
                 </TextView>
             </LinearLayout>
+            <TextView
+                android:id="@+id/propertyPostedApartmentPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "$ 1234"
+                android:textSize="13dp"
+                android:layout_marginLeft="290dp"
+                android:textStyle="bold">
 
+            </TextView>
         </LinearLayout>
 
     </LinearLayout>
