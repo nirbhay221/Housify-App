@@ -48,7 +48,8 @@ class expensesFragment : Fragment(R.layout.fragment_expenses) {
         recyclerView.adapter = taskAdapter
 
         EventChangeListener()
-    }private fun EventChangeListener() {
+    }
+    private fun EventChangeListener() {
         val currentUserUid = auth.currentUser?.uid
         if (currentUserUid != null) {
             fireStore.collection("Roommate")
@@ -84,60 +85,7 @@ class expensesFragment : Fragment(R.layout.fragment_expenses) {
                                             "Roommate group ID: $roommateGroupId",
                                             Toast.LENGTH_LONG
                                         ).show()
-                                        fireStore.collection("Roommate")
-                                            .document(roommateGroupId)
-                                            .get()
-                                            .addOnSuccessListener { document ->
-                                                if (document.exists() && document.contains("tasks")) {
-                                                    taskArrayList.clear()
-
-                                                    val tasksArray =
-                                                        document.get("tasks") as? ArrayList<Map<String, Any>>
-
-                                                    if (tasksArray != null) {
-                                                        for (task in tasksArray) {
-                                                            val taskId = task["taskId"] as? String
-                                                            val taskTitle =
-                                                                task["taskTitle"] as? String
-                                                            val taskDescription =
-                                                                task["taskDescription"] as? String
-                                                            val taskDeadline =
-                                                                task["taskDeadline"] as? String
-
-                                                            if (taskId != null && taskTitle != null && taskDescription != null && taskDeadline != null) {
-                                                                val taskModel = TaskModel(
-                                                                    taskId,
-                                                                    taskTitle,
-                                                                    taskDescription,
-                                                                    taskDeadline
-                                                                )
-                                                                taskArrayList.add(taskModel)
-                                                            }
-                                                        }
-
-                                                        taskAdapter.notifyDataSetChanged()
-
-                                                        Toast.makeText(
-                                                            requireContext(),
-                                                            "Tasks for roommate group $roommateGroupId updated successfully",
-                                                            Toast.LENGTH_LONG
-                                                        ).show()
-                                                    }
-                                                } else {
-                                                    Toast.makeText(
-                                                        requireContext(),
-                                                        "Roommate group document doesn't exist or doesn't contain tasks",
-                                                        Toast.LENGTH_LONG
-                                                    ).show()
-                                                }
-                                            }
-                                            .addOnFailureListener { e ->
-                                                Toast.makeText(
-                                                    requireContext(),
-                                                    "Error getting roommate group document: ${e.message}",
-                                                    Toast.LENGTH_LONG
-                                                ).show()
-                                            }
+                                        retrieveTasksForRoommate(roommateGroupId)
                                     } else {
                                         Toast.makeText(
                                             requireContext(),
@@ -152,5 +100,46 @@ class expensesFragment : Fragment(R.layout.fragment_expenses) {
                 }
         }
     }
-}
 
+    private fun retrieveTasksForRoommate(roommateGroupId: String) {
+        fireStore.collection("taskStorage")
+            .whereEqualTo("taskRoommateId", roommateGroupId)
+            .get()
+            .addOnSuccessListener { taskDocuments ->
+                taskArrayList.clear()
+
+                for (taskDocument in taskDocuments) {
+                    val taskId = taskDocument.getString("taskId")
+                    val taskTitle = taskDocument.getString("taskTitle")
+                    val taskDescription = taskDocument.getString("taskDescription")
+                    val taskDeadline = taskDocument.getString("taskDeadline")
+
+                    if (taskId != null && taskTitle != null && taskDescription != null && taskDeadline != null) {
+                        val taskModel = TaskModel(
+                            taskId,
+                            taskTitle,
+                            taskDescription,
+                            taskDeadline,
+                            roommateGroupId
+                        )
+                        taskArrayList.add(taskModel)
+                    }
+                }
+
+                taskAdapter.notifyDataSetChanged()
+
+                Toast.makeText(
+                    requireContext(),
+                    "Tasks for roommate group $roommateGroupId retrieved successfully",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(
+                    requireContext(),
+                    "Error getting tasks: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+    }
+}

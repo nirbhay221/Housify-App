@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center">
+
    <EditText
         android:id="@+id/taskTitleEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Task Title"
         android:inputType="text" />
+
 
     <EditText
         android:id="@+id/taskDescriptionEditText"
@@ -31,5 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit Task" />
+    <FrameLayout
+        android:id="@+id/fragment_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp">
+        </FrameLayout>
 
 </LinearLayout>
