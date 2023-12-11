@@ -24,8 +24,8 @@ import com.google.firebase.firestore.QuerySnapshot
 class propertyInfoActivity : AppCompatActivity() {
 
     private lateinit var propertyLocation: TextView
+    private lateinit var propertyTitle: TextView
     private lateinit var propertyName: TextView
-//    private lateinit var propertyImages: View
     private lateinit var propertyImages: ImageView
     private lateinit var propertyUid: TextView
     private lateinit var addUserToCurrentUserCollection: Button
@@ -33,6 +33,7 @@ class propertyInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_info)
+        propertyTitle = findViewById(R.id.propertyTitle)
         propertyLocation = findViewById(R.id.propertyLocationInfo)
         propertyName = findViewById(R.id.propertyNameInfo)
         propertyImages = findViewById<ImageView>(R.id.propertyImages)
@@ -44,6 +45,7 @@ class propertyInfoActivity : AppCompatActivity() {
             val propName = extras.getString("propertyName")
             val propLocation = extras.getString("propertyLocation")
             propUid = extras.getString("propertyUid").toString()
+            propertyTitle.text = propName
             propertyName.text = propName
             propertyLocation.text = propLocation
             propertyUid.text = propUid
