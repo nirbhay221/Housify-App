@@ -41,61 +41,116 @@ class expensesFragment : Fragment(R.layout.fragment_expenses) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.taskPostedList
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         recyclerView.setHasFixedSize(true)
         taskArrayList = arrayListOf()
         taskAdapter = taskPostedAdapter(taskArrayList)
         recyclerView.adapter = taskAdapter
 
         EventChangeListener()
-    }
-    private fun EventChangeListener() {
+    }private fun EventChangeListener() {
         val currentUserUid = auth.currentUser?.uid
-        Toast.makeText(requireContext(), "$currentUserUid", Toast.LENGTH_LONG).show()
         if (currentUserUid != null) {
             fireStore.collection("Roommate")
-                .whereArrayContains("roommates", mapOf("uid" to currentUserUid))
                 .get()
                 .addOnSuccessListener { documents ->
                     if (documents.isEmpty) {
-                        Toast.makeText(requireContext(), "No roommate groups found", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "No roommate groups found",
+                            Toast.LENGTH_LONG
+                        ).show()
                         return@addOnSuccessListener
                     }
-
                     for (document in documents) {
-                        val roommateGroupId = document.getString("roommateGroupId")
-                        if (roommateGroupId != null) {
-                            fireStore.collection("Roommate").document(roommateGroupId)
-                                .collection("tasks")
-                                .addSnapshotListener(object : EventListener<QuerySnapshot> {
-                                    override fun onEvent(
-                                        value: QuerySnapshot?,
-                                        error: FirebaseFirestoreException?
-                                    ) {
-                                        if (error != null) {
-                                            Log.e("Firestore Error", error.message.toString())
-                                            return
-                                        }
-                                        for (document in value!!.documents) {
-                                            val taskId = document.getString("taskId")
-                                            val taskTitle = document.getString("taskTitle")
-                                            val taskDescription = document.getString("taskDescription")
-                                            val taskDeadline = document.getString("taskDeadline")
-                                            val assignedToCurrentUser = document.getBoolean("assignedToCurrentUser") ?: false
+                        val roommatesArray =
+                            document.get("roommates") as? ArrayList<Map<String, Any>>
 
-                                            val task = TaskModel(taskId, taskTitle, taskDescription, taskDeadline)
-                                            task.assignedToCurrentUser = assignedToCurrentUser
+                        if (roommatesArray != null) {
+                            for (roommate in roommatesArray) {
+                                val uid = roommate["uid"] as? String
+                                if (uid == currentUserUid) {
 
-                                            taskArrayList.add(task)
-                                        }
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "User found in a roommate group",
+                                        Toast.LENGTH_LONG
+                                    ).show()
 
-                                        taskAdapter.notifyDataSetChanged()
+                                    val roommateGroupId = document.getString("roommateGroupId")
+                                    if (roommateGroupId != null) {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Roommate group ID: $roommateGroupId",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        fireStore.collection("Roommate")
+                                            .document(roommateGroupId)
+                                            .get()
+                                            .addOnSuccessListener { document ->
+                                                if (document.exists() && document.contains("tasks")) {
+                                                    taskArrayList.clear()
+
+                                                    val tasksArray =
+                                                        document.get("tasks") as? ArrayList<Map<String, Any>>
+
+                                                    if (tasksArray != null) {
+                                                        for (task in tasksArray) {
+                                                            val taskId = task["taskId"] as? String
+                                                            val taskTitle =
+                                                                task["taskTitle"] as? String
+                                                            val taskDescription =
+                                                                task["taskDescription"] as? String
+                                                            val taskDeadline =
+                                                                task["taskDeadline"] as? String
+
+                                                            if (taskId != null && taskTitle != null && taskDescription != null && taskDeadline != null) {
+                                                                val taskModel = TaskModel(
+                                                                    taskId,
+                                                                    taskTitle,
+                                                                    taskDescription,
+                                                                    taskDeadline
+                                                                )
+                                                                taskArrayList.add(taskModel)
+                                                            }
+                                                        }
+
+                                                        taskAdapter.notifyDataSetChanged()
+
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            "Tasks for roommate group $roommateGroupId updated successfully",
+                                                            Toast.LENGTH_LONG
+                                                        ).show()
+                                                    }
+                                                } else {
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Roommate group document doesn't exist or doesn't contain tasks",
+                                                        Toast.LENGTH_LONG
+                                                    ).show()
+                                                }
+                                            }
+                                            .addOnFailureListener { e ->
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Error getting roommate group document: ${e.message}",
+                                                    Toast.LENGTH_LONG
+                                                ).show()
+                                            }
+                                    } else {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Current user UID is null",
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }
-                                })
+                                }
+                            }
                         }
                     }
                 }
         }
     }
-
 }
+
