@@ -25,7 +25,8 @@ class propertyInfoActivity : AppCompatActivity() {
 
     private lateinit var propertyLocation: TextView
     private lateinit var propertyTitle: TextView
-    private lateinit var propertyName: TextView
+    private lateinit var propertyBedrooms: TextView
+    private lateinit var propertyBaths: TextView
     private lateinit var propertyImages: ImageView
     private lateinit var propertyUid: TextView
     private lateinit var addUserToCurrentUserCollection: Button
@@ -35,7 +36,7 @@ class propertyInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_property_info)
         propertyTitle = findViewById(R.id.propertyTitle)
         propertyLocation = findViewById(R.id.propertyLocationInfo)
-        propertyName = findViewById(R.id.propertyNameInfo)
+        propertyBedrooms = findViewById(R.id.propertyBedrooms)
         propertyImages = findViewById<ImageView>(R.id.propertyImages)
         propertyUid = findViewById(R.id.propertyUidInfo)
         addUserToCurrentUserCollection = findViewById(R.id.chatWithUser)
@@ -46,7 +47,7 @@ class propertyInfoActivity : AppCompatActivity() {
             val propLocation = extras.getString("propertyLocation")
             propUid = extras.getString("propertyUid").toString()
             propertyTitle.text = propName
-            propertyName.text = propName
+            propertyBedrooms.text = "3"
             propertyLocation.text = propLocation
             propertyUid.text = propUid
             Toast.makeText(this, propUid,Toast.LENGTH_LONG).show()
