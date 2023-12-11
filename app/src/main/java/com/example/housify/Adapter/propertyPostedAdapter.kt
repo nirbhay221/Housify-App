@@ -1,7 +1,9 @@
 package com.example.housify.Adapter
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +54,14 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
         holder.propertyTitle.setOnClickListener{
             holder.propertyTitle.text = property.userUid
         }
+
+        if (!property.userPropertyImages.isNullOrEmpty()) {
+            val decodedString: ByteArray = Base64.decode(property.userPropertyImages, Base64.DEFAULT)
+            val decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            holder.propertyImage.setImageBitmap(decodedBitmap)
+        } else {
+
+        }
         val currentUserUid = auth.currentUser?.uid
 //        if (currentUserUid != null) {
 //            firestore.collection("User").document(currentUserUid).get()
@@ -84,7 +94,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
                     .addOnSuccessListener { documentSnapshot ->
                         val likedProperties = documentSnapshot["likedProperties"] as? List<String> ?: emptyList()
                         isPropertyLiked = likedProperties.contains(property.propertyUid)
-                              }
+                    }
                     .addOnFailureListener {
 
                     }
@@ -150,9 +160,10 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
         val propertyAddress : TextView = itemView.findViewById(R.id.apartmentPostedLocation)
         var viewMoreInfo = itemView.findViewById<TextView>(R.id.viewPostedApartmentInfo)
         var likeButton = itemView.findViewById<ImageView>(R.id.likeButton)
+        val propertyImage: ImageView = itemView.findViewById(R.id.propertyPostedImage)
 
 
-
-        }
 
     }
+
+}
