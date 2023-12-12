@@ -1,8 +1,13 @@
 package com.example.housify
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.Manifest
+
 import android.util.Base64
 import android.util.Log
 import android.widget.Button
@@ -10,6 +15,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,8 +37,13 @@ class propertyInfoActivity : AppCompatActivity() {
     private lateinit var propertyYear: TextView
     private lateinit var propertyImages: ImageView
     private lateinit var propertyUid: TextView
-    private lateinit var addUserToCurrentUserCollection: Button
+    private lateinit var addUserToCurrentUserCollection: ImageView
     private lateinit var propUid: String
+    private lateinit var phoneNumber: String
+    private lateinit var userName : TextView
+    private lateinit var callToUser : ImageView
+
+    private lateinit var phoneNumbeListedWithUser : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_info)
@@ -43,7 +55,10 @@ class propertyInfoActivity : AppCompatActivity() {
         propertyYear = findViewById(R.id.propertyYear)
         propertyImages = findViewById<ImageView>(R.id.propertyImages)
         propertyUid = findViewById(R.id.propertyUidInfo)
-        addUserToCurrentUserCollection = findViewById(R.id.chatWithUser)
+        addUserToCurrentUserCollection = findViewById(R.id.chatUserNow)
+        userName = findViewById(R.id.usernameInfoPage)
+        callToUser = findViewById(R.id.phoneUser)
+        phoneNumbeListedWithUser = findViewById(R.id.propertyUserListedPhoneNumber)
 
         val searchApi = OnlineSearch.create(this, "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8")
 
@@ -53,11 +68,40 @@ class propertyInfoActivity : AppCompatActivity() {
             val propName = extras.getString("propertyName")
             val propLocation = extras.getString("propertyLocation")
             propUid = extras.getString("propertyUid").toString()
+            val propUserUid = extras.getString("userUid").toString()
             propertyTitle.text = propName
             propertyBedrooms.text = "3"
             propertyLocation.text = propLocation
             propertyUid.text = propUid
-            Toast.makeText(this, propUid,Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"$propUserUid",Toast.LENGTH_LONG).show()
+            phoneNumber= getUserNameFromUid(propUserUid)
+
+
+            Toast.makeText(this,"$phoneNumber",Toast.LENGTH_LONG).show()
+
+            callToUser.setOnClickListener{
+                if (phoneNumbeListedWithUser.text.isNotEmpty()) {
+                    if (ContextCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.CALL_PHONE
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        val intent = Intent(Intent.ACTION_CALL)
+                        intent.data = Uri.parse("tel:$phoneNumber")
+                        startActivity(intent)
+                    } else {
+                        ActivityCompat.requestPermissions(
+                            this,
+                            arrayOf(Manifest.permission.CALL_PHONE),
+                            100
+                        )
+                    }
+                } else {
+                    Toast.makeText(this, "Phone number is empty", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+
 
             val propertyLocation = propLocation
             val options = propertyLocation?.let { SearchOptions(query = it, limit = 1) }
@@ -111,9 +155,8 @@ class propertyInfoActivity : AppCompatActivity() {
                         Log.e("Property View Info", "Error getting property details", exception)
                     }
 
-                if (propUid != null) {
-                    getUserNameFromUid(propUid)
-                }
+
+
             }
             addUserToCurrentUserCollection.setOnClickListener {
                 var fireStore = FirebaseFirestore.getInstance()
@@ -193,23 +236,27 @@ class propertyInfoActivity : AppCompatActivity() {
             return "${currentUserUid}_${selectedUserUid}_${System.currentTimeMillis()}"
         }
 
-        private fun getUserNameFromUid(uid: String) {
+        private fun getUserNameFromUid(uid: String):String {
             val firestore = FirebaseFirestore.getInstance()
             val usersCollection = firestore.collection("User")
-            if (uid != null) {
+            var userPhoneNumber = ""
+                if (uid != null) {
                 usersCollection.document(uid).get().addOnSuccessListener { documentSnapshot ->
                     if (documentSnapshot.exists()) {
+                        Toast.makeText(this,"It Enters.",Toast.LENGTH_LONG).show()
+
                         val userFirstName = documentSnapshot.getString("firstName")
                         val userLastName = documentSnapshot.getString("lastName")
-//                    propertyUid.text = userFirstName + " "+ userLastName
+                        userPhoneNumber= documentSnapshot.getString("number").toString()
+                        phoneNumbeListedWithUser.text = userPhoneNumber
+                        userName.text = userFirstName + " "+ userLastName
+                        Toast.makeText(this,"User Name:  $userFirstName, userPhoneNumber: $userPhoneNumber ",Toast.LENGTH_LONG).show()
                         propertyUid.text = userFirstName
-                    } else {
-
                     }
-                }.addOnFailureListener { exception ->
-                    Log.e("propertyInfoActivity", "Error getting User name", exception)
                 }
+                    return userPhoneNumber
             }
+            return userPhoneNumber
         }
 
     private fun addToChatCluster(currentUserUid: String, selectedUserUid: String) {

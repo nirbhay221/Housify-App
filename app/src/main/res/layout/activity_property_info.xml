@@ -209,28 +209,59 @@
             android:layout_marginLeft="140dp"
             android:text="User"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="Number Listed"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        <TextView
+            android:id="@+id/propertyUserListedPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:text="User"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
-        <Button
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id= "@+id/usernameInfoPage"></TextView>
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:id = "@+id/chatWithUser"
-            android:text = "Chat"
-        />
-        <Button
+            android:id = "@+id/phoneUser"
+            android:src = "@drawable/ic_phone_call_user"
+            />
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:id = "@+id/save"
-            android:text = "Save"
-            />
+            android:layout_marginRight="20dp"
+            android:id = "@+id/chatUserNow"
+            android:src = "@drawable/chat">
+
+        </ImageView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:id = "@+id/likePropertyViewInfoPage"
+            android:src = "@drawable/ic_like">
+
+        </ImageView>
     </LinearLayout>
 
 
