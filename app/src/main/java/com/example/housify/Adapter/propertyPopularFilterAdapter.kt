@@ -64,6 +64,14 @@ class propertyPopularFilterAdapter (private val propertyList: ArrayList<property
         }
         val currentUserUid = auth.currentUser?.uid
 
+        if (!property.userPropertyImages.isNullOrEmpty()) {
+            val decodedString: ByteArray = Base64.decode(property.userPropertyImages, Base64.DEFAULT)
+            val decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            holder.propertyImage.setImageBitmap(decodedBitmap)
+        } else {
+
+        }
+
 
         holder.viewMoreInfo.setOnClickListener {
             val bundle = Bundle()
@@ -151,6 +159,7 @@ class propertyPopularFilterAdapter (private val propertyList: ArrayList<property
         val propertyAddress: TextView = itemView.findViewById(R.id.apartmentPostedLocation)
         var viewMoreInfo = itemView.findViewById<TextView>(R.id.viewPostedApartmentInfo)
         var likeButton = itemView.findViewById<ImageView>(R.id.likeButton)
+        val propertyImage: ImageView = itemView.findViewById(R.id.propertyPostedImage)
 
 
     }
