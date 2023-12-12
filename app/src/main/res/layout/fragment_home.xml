@@ -21,7 +21,37 @@
 <!--            android:textAlignment="center"-->
 <!--            android:textSize = "30sp"-->
 <!--            ></TextView>-->
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:queryHint="Search..."
+                android:iconifiedByDefault="false"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                />
+            <ImageView
+                android:id = "@+id/searchPropertyFromHome"
 
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src= "@drawable/ic_search"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                ></ImageView>
+            <ImageView
+                android:id = "@+id/searchPageOpen"
+
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src= "@drawable/ic_search_page"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                ></ImageView>
             <ImageView
                 android:id = "@+id/saveUserCurrentLocation"
 
@@ -32,6 +62,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="2dp"
                 ></ImageView>
+
         </LinearLayout>
         <com.google.android.material.appbar.AppBarLayout
             android:id = "@+id/appBarLayoutHome"
