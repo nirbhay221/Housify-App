@@ -54,7 +54,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     implementation("com.google.android.libraries.places:places:3.3.0")
     implementation("androidx.activity:activity-ktx:1.8.1")
-
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
 

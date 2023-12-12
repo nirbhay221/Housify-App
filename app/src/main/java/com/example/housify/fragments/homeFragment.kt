@@ -2,6 +2,7 @@ package com.example.housify.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
@@ -32,6 +33,7 @@ import com.example.housify.Models.propertyModel
 import com.example.housify.R
 import com.example.housify.databinding.FragmentHomeBinding
 import com.example.housify.databinding.FragmentPropertyAddBinding
+import com.example.housify.searchFilterActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -117,6 +119,21 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                 fusedLocationClient.removeLocationUpdates(locationCallback)
             }
         }
+//        binding.searchPageOpen.setOnClickListener{
+//            var fragmentSearchFilter = searchFilterFragment()
+//            parentFragmentManager.beginTransaction().replace(R.id.fragment_container_in_home,fragmentSearchFilter)
+//                .commit()
+//        }
+        binding.searchPageOpen.setOnClickListener {
+            val intent = Intent(requireContext(), searchFilterActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
+
+
+
         binding.saveUserCurrentLocation.setOnClickListener {
 
             if (ActivityCompat.checkSelfPermission(

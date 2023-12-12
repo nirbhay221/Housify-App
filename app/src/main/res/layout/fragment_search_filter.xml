@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/textViewPropertyType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Property Type"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipHouse"
+        style="@style/Widget.MaterialComponents.Chip.Choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="House"
+        android:checkable="true"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginLeft="20sp"
+        />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipApartment"
+        style="@style/Widget.MaterialComponents.Chip.Choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apartment"
+        android:checkable="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10sp"
+
+        />
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipCondo"
+        style="@style/Widget.MaterialComponents.Chip.Choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Condo"
+        android:checkable="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10sp"
+        />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipCabin"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cabin"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10sp"
+            />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipOther"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10sp"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textViewPropertyPriceRange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Price Range"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20sp"
+        />
+<!--    <com.google.android.material.slider.RangeSlider-->
+<!--        android:id="@+id/priceRangeSlider"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:valueFrom="0"-->
+<!--        android:valueTo="100"-->
+<!--        android:values="@array/default_price_range"-->
+<!--        android:layout_marginLeft="20sp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginRight="20sp"/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAnyPrice"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Any"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="20sp"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipMonthly"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="10sp"
+            />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAnually"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anually"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="10sp"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textViewPropertyFacilities"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Property Facilities"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAnyFacilities"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Any"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="20sp"
+            />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipKitchen"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kitchen"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="10sp"
+            />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipSelfCheckIn"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Self check-in"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="10sp"
+            />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFreeParking"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Free Parking"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="10sp"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAirConditioner"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Air Conditioner"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="20sp"
+            />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipSecurity"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Security"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="10sp"
+            />
+        <com.google.android.material.chip.Chip
+        android:id="@+id/chipFurnished"
+        style="@style/Widget.MaterialComponents.Chip.Choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Furnished"
+        android:checkable="true"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginLeft="10sp"
+        />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipTV"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TV"
+            android:checkable="true"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginLeft="10sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="120dp">
+
+        <ImageView
+            android:id="@+id/resetSearchChoices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="10sp"
+            android:src="@drawable/ic_referesh">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/textViewPropertyRefreshText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10sp"
+            android:text="Reset all"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/showResultsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Results"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#000000"
+            android:layout_marginLeft="140sp">
+            </Button>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,16 +42,16 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="2dp"
                 ></ImageView>
-            <ImageView
-                android:id = "@+id/searchPageOpen"
 
-                android:layout_width="25dp"
+            <ImageView
+                android:id="@+id/searchPageOpen"
+
+                android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:src= "@drawable/ic_search_page"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="8dp"
                 android:layout_marginTop="2dp"
-                ></ImageView>
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_search_page"></ImageView>
             <ImageView
                 android:id = "@+id/saveUserCurrentLocation"
 
@@ -82,6 +82,12 @@
             android:layout_height="match_parent">
 
         </androidx.viewpager.widget.ViewPager>
+        <FrameLayout
+            android:id="@+id/fragmentContainerInHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            />
     </LinearLayout>
 
 <!--    -->
