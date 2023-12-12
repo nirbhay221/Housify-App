@@ -166,7 +166,7 @@
             android:id="@+id/propertyYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="190dp"
+            android:layout_marginLeft="175dp"
             android:text="1990"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
@@ -186,7 +186,7 @@
             android:id="@+id/propertyType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
+            android:layout_marginLeft="175dp"
             android:text="Sublet"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
@@ -206,7 +206,7 @@
             android:id="@+id/propertyUidInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="140dp"
             android:text="User"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
