@@ -47,6 +47,12 @@ class propertyLikedFilterAdapter (private val propertyList: ArrayList<propertyMo
                     val likedProperties =
                         documentSnapshot["likedProperties"] as? List<String> ?: emptyList()
                     isPropertyLiked = likedProperties.contains(property.propertyUid)
+                    holder.likeButton.setImageResource(
+                        if (isPropertyLiked)
+                            R.drawable.ic_like_selected
+                        else
+                            R.drawable.ic_like
+                    )
                 }
                 .addOnFailureListener {
 
@@ -99,6 +105,12 @@ class propertyLikedFilterAdapter (private val propertyList: ArrayList<propertyMo
                         val likedProperties =
                             documentSnapshot["likedProperties"] as? List<String> ?: emptyList()
                         isPropertyLiked = likedProperties.contains(property.propertyUid)
+                        holder.likeButton.setImageResource(
+                            if (isPropertyLiked)
+                                R.drawable.ic_like_selected
+                            else
+                                R.drawable.ic_like
+                        )
                     }
                     .addOnFailureListener {
 

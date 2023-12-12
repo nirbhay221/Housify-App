@@ -114,6 +114,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
                                         .update("likedProperties", FieldValue.arrayUnion(it1))
                                         .addOnSuccessListener {
                                             isPropertyLiked = true
+                                            holder.updateLikeButton(isPropertyLiked)
                                         }
                                         .addOnFailureListener {}
                                 }
@@ -138,6 +139,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
                                     document(userUid).update("likedProperties", FieldValue.arrayRemove(it1))
                                         .addOnSuccessListener {
                                             isPropertyLiked = false
+                                            holder.updateLikeButton(isPropertyLiked)
                                         }
                                         .addOnFailureListener { }
                                 }
@@ -163,6 +165,14 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
         var viewMoreInfo = itemView.findViewById<TextView>(R.id.viewPostedApartmentInfo)
         var likeButton = itemView.findViewById<ImageView>(R.id.likeButton)
         val propertyImage: ImageView = itemView.findViewById(R.id.propertyPostedImage)
+
+        fun updateLikeButton(isLiked: Boolean) {
+            if (isLiked) {
+                likeButton.setImageResource(R.drawable.ic_like_selected)
+            } else {
+                likeButton.setImageResource(R.drawable.ic_like)
+            }
+        }
 
 
 
