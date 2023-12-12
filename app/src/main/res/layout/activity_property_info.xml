@@ -115,7 +115,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="170dp"
-            android:text="1,560 sq ft"
+            android:text="1,560"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:text="sq ft"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
     <LinearLayout
@@ -157,6 +163,27 @@
 
             android:paddingLeft="190dp"
             android:text="1990"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:text="Type"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        <TextView
+            android:id="@+id/propertyType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingLeft="190dp"
+            android:text="Sublet"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
     <LinearLayout

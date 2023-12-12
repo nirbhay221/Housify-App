@@ -27,6 +27,9 @@ class propertyInfoActivity : AppCompatActivity() {
     private lateinit var propertyTitle: TextView
     private lateinit var propertyBedrooms: TextView
     private lateinit var propertyBaths: TextView
+    private lateinit var propertyNeighbourhood: TextView
+    private lateinit var propertyType: TextView
+    private lateinit var propertyYear: TextView
     private lateinit var propertyImages: ImageView
     private lateinit var propertyUid: TextView
     private lateinit var addUserToCurrentUserCollection: Button
@@ -37,6 +40,10 @@ class propertyInfoActivity : AppCompatActivity() {
         propertyTitle = findViewById(R.id.propertyTitle)
         propertyLocation = findViewById(R.id.propertyLocationInfo)
         propertyBedrooms = findViewById(R.id.propertyBedrooms)
+        propertyBaths = findViewById(R.id.propertyBaths)
+        propertyNeighbourhood = findViewById(R.id.propertyNeighbourhood)
+        propertyType = findViewById(R.id.propertyType)
+        propertyYear = findViewById(R.id.propertyYear)
         propertyImages = findViewById<ImageView>(R.id.propertyImages)
         propertyUid = findViewById(R.id.propertyUidInfo)
         addUserToCurrentUserCollection = findViewById(R.id.chatWithUser)
