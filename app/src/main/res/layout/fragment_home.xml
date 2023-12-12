@@ -10,17 +10,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Home Fragment"
-            android:textAlignment="center"
-            android:textSize = "30sp"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="Home Fragment"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize = "30sp"-->
+<!--            ></TextView>-->
 
+            <ImageView
+                android:id = "@+id/saveUserCurrentLocation"
 
-
-        </TextView>
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src= "@drawable/ic_my_location"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                ></ImageView>
+        </LinearLayout>
         <com.google.android.material.appbar.AppBarLayout
             android:id = "@+id/appBarLayoutHome"
             android:layout_width="match_parent"

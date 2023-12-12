@@ -21,9 +21,8 @@ class userModel {
         set(value){
             field = value ?: ""
         }
-
     var likedProperties: MutableList<String> = mutableListOf()
-    constructor():this("","","","")
+    constructor():this("","","","",)
     constructor(firstName: String?, lastName: String?, number: String?, userImage: String?, likedProperties: MutableList<String>) {
         this.firstName = firstName
         this.lastName = lastName
@@ -31,7 +30,6 @@ class userModel {
         this.userImage = userImage
         this.likedProperties = likedProperties
     }
-
     constructor(firstName:String?,lastName:String?,number:String?,userImage:String?){
         this.firstName = firstName
         this.lastName = lastName
@@ -39,7 +37,6 @@ class userModel {
         this.userImage = userImage
 
     }
-
 
 
 

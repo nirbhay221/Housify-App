@@ -26,6 +26,12 @@ class UserModel {
         set(value){
             field = value ?: ""
         }
+    var userLocation : String?= ""
+        get() = field ?: ""
+        set(value){
+            field = value ?: ""
+        }
+
     constructor():this("","","","")
 
     constructor(firstName:String?,lastName:String?,number:String?,userImage:String){

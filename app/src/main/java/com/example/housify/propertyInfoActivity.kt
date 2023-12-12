@@ -2,24 +2,23 @@ package com.example.housify
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.example.housify.Models.messageModel
-import com.example.housify.Models.propertyModel
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import com.tomtom.sdk.search.Search
+import com.tomtom.sdk.search.SearchCallback
+import com.tomtom.sdk.search.SearchOptions
+import com.tomtom.sdk.search.SearchResponse
+import com.tomtom.sdk.search.common.error.SearchFailure
+import com.tomtom.sdk.search.online.OnlineSearch
 
 class propertyInfoActivity : AppCompatActivity() {
 
@@ -46,6 +45,9 @@ class propertyInfoActivity : AppCompatActivity() {
         propertyUid = findViewById(R.id.propertyUidInfo)
         addUserToCurrentUserCollection = findViewById(R.id.chatWithUser)
 
+        val searchApi = OnlineSearch.create(this, "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8")
+
+
         val extras = intent.extras
         if (extras != null) {
             val propName = extras.getString("propertyName")
@@ -56,6 +58,40 @@ class propertyInfoActivity : AppCompatActivity() {
             propertyLocation.text = propLocation
             propertyUid.text = propUid
             Toast.makeText(this, propUid,Toast.LENGTH_LONG).show()
+
+            val propertyLocation = propLocation
+            val options = propertyLocation?.let { SearchOptions(query = it, limit = 1) }
+
+            if (options != null) {
+                val search = searchApi.search(options, object : SearchCallback {
+
+                    override fun onSuccess(result: SearchResponse) {
+                        if (result.results.isNotEmpty()) {
+                            val firstResult = result.results.first()
+                            val place = firstResult.place
+
+                            if (place != null && place.coordinate != null) {
+                                val latitude = place.coordinate.latitude
+                                val longitude = place.coordinate.longitude
+
+
+                                Log.d("TomTom", "Latitude: $latitude, Longitude: $longitude")
+                                }
+
+//                            val location = firstResult.position
+//                            val latitude = location.latitude
+//                            val longitude = location.longitude
+
+//                            Log.d("TomTom", "Latitude: $latitude, Longitude: $longitude")
+                        } else {
+
+                        }
+                    }
+
+                    override fun onFailure(failure: SearchFailure) {
+                    }
+                })
+            }
 
             propUid?.let { propertyUid ->
                 FirebaseFirestore.getInstance().collection("Properties").document(propUid).get()
