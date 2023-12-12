@@ -27,7 +27,6 @@ class propertyInfoActivity : AppCompatActivity() {
     private lateinit var propertyTitle: TextView
     private lateinit var propertyBedrooms: TextView
     private lateinit var propertyBaths: TextView
-    private lateinit var propertyNeighbourhood: TextView
     private lateinit var propertyType: TextView
     private lateinit var propertyYear: TextView
     private lateinit var propertyImages: ImageView
@@ -38,10 +37,9 @@ class propertyInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_info)
         propertyTitle = findViewById(R.id.propertyTitle)
-        propertyLocation = findViewById(R.id.propertyLocationInfo)
+        propertyLocation = findViewById(R.id.propertyLocation)
         propertyBedrooms = findViewById(R.id.propertyBedrooms)
         propertyBaths = findViewById(R.id.propertyBaths)
-        propertyNeighbourhood = findViewById(R.id.propertyNeighbourhood)
         propertyType = findViewById(R.id.propertyType)
         propertyYear = findViewById(R.id.propertyYear)
         propertyImages = findViewById<ImageView>(R.id.propertyImages)
