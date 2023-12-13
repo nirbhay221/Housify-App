@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.Manifest
+import android.annotation.SuppressLint
 
 import android.util.Base64
 import android.util.Log
@@ -20,11 +21,20 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.tomtom.sdk.common.SystemClock
+import com.tomtom.sdk.location.GeoLocation
 import com.tomtom.sdk.location.GeoPoint
 import com.tomtom.sdk.map.display.MapOptions
 import com.tomtom.sdk.map.display.TomTomMap
+import com.tomtom.sdk.map.display.camera.CameraOptions
+import com.tomtom.sdk.map.display.camera.CameraTrackingMode
+import com.tomtom.sdk.map.display.gesture.GestureType
 import com.tomtom.sdk.map.display.image.ImageFactory
+import com.tomtom.sdk.map.display.location.LocationAccuracyPolicy
+import com.tomtom.sdk.map.display.location.LocationMarkerOptions
+import com.tomtom.sdk.map.display.marker.Marker
 import com.tomtom.sdk.map.display.marker.MarkerOptions
+import com.tomtom.sdk.map.display.style.StyleMode
 import com.tomtom.sdk.map.display.ui.MapFragment
 import com.tomtom.sdk.search.Search
 import com.tomtom.sdk.search.SearchCallback
@@ -32,6 +42,9 @@ import com.tomtom.sdk.search.SearchOptions
 import com.tomtom.sdk.search.SearchResponse
 import com.tomtom.sdk.search.common.error.SearchFailure
 import com.tomtom.sdk.search.online.OnlineSearch
+import kotlin.properties.Delegates
+import kotlin.time.Duration.Companion.nanoseconds
+import kotlin.time.Duration.Companion.seconds
 
 class propertyInfoActivity : AppCompatActivity() {
 
@@ -50,8 +63,18 @@ class propertyInfoActivity : AppCompatActivity() {
     private lateinit var tomTomMap: TomTomMap
     private lateinit var userName : TextView
     private lateinit var callToUser : ImageView
+    private lateinit var zoomIn : ImageView
+
+
+    private var propertyLongitude:Double = 0.0
+    private var propertyLatitude:Double = 0.0
+    private var propertyLocationAddressPinned: String=""
+
+    private lateinit var zoomOut : ImageView
+
 
     private lateinit var phoneNumbeListedWithUser : TextView
+    @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_info)
@@ -66,31 +89,9 @@ class propertyInfoActivity : AppCompatActivity() {
         addUserToCurrentUserCollection = findViewById(R.id.chatUserNow)
         userName = findViewById(R.id.usernameInfoPage)
         callToUser = findViewById(R.id.phoneUser)
+        zoomIn = findViewById(R.id.zoomInOnMap)
+        zoomOut = findViewById(R.id.zoomOutOnMap)
         phoneNumbeListedWithUser = findViewById(R.id.propertyUserListedPhoneNumber)
-
-        val mapOptions = MapOptions(mapKey = "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8")
-        val mapFragment = MapFragment.newInstance(mapOptions)
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.map_container, mapFragment)
-            .commit()
-        val amsterdam = GeoPoint(52.379189, 4.899431)
-        val markerOptions = MarkerOptions(
-            coordinate = amsterdam,
-            pinImage = ImageFactory.fromResource(R.drawable.ic_location_marker)
-        )
-        mapFragment.getMapAsync{
-                tomtomMap ->
-            this@propertyInfoActivity.tomTomMap = tomtomMap
-
-           val amsterdam = GeoPoint(52.379189, 4.899431)
-            val markerOptions = MarkerOptions(
-                coordinate = amsterdam,
-                pinImage = ImageFactory.fromResource(R.drawable.ic_location_marker)
-            )
-            tomTomMap.addMarker(markerOptions)
-            tomTomMap.zoomToMarkers()
-        }
         val searchApi = OnlineSearch.create(this, "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8")
 
 
@@ -98,6 +99,7 @@ class propertyInfoActivity : AppCompatActivity() {
         if (extras != null) {
             val propName = extras.getString("propertyName")
             val propLocation = extras.getString("propertyLocation")
+
             propUid = extras.getString("propertyUid").toString()
             val propUserUid = extras.getString("userUid").toString()
             propertyTitle.text = propName
@@ -148,7 +150,10 @@ class propertyInfoActivity : AppCompatActivity() {
                             if (place != null && place.coordinate != null) {
                                 val latitude = place.coordinate.latitude
                                 val longitude = place.coordinate.longitude
-
+                                propertyLatitude=latitude
+                                propertyLongitude =longitude
+                                propertyLocationAddressPinned = propLocation
+                                setupMap()
 
                                 Log.d("TomTom", "Latitude: $latitude, Longitude: $longitude")
                                 }
@@ -167,6 +172,7 @@ class propertyInfoActivity : AppCompatActivity() {
                     }
                 })
             }
+
 
             propUid?.let { propertyUid ->
                 FirebaseFirestore.getInstance().collection("Properties").document(propUid).get()
@@ -203,7 +209,93 @@ class propertyInfoActivity : AppCompatActivity() {
         }
     }
 
-        private fun createChatDocument(currentUserUid: String, selectedUserUid: String) {
+    private fun setupMap() {
+        val mapOptions = MapOptions(mapKey = "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8")
+        val mapFragment = MapFragment.newInstance(mapOptions)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.map_fragment, mapFragment)
+            .commit()
+        val amsterdam = GeoPoint(propertyLatitude, propertyLongitude)
+        val markerOptions = MarkerOptions(
+            coordinate = amsterdam,
+            pinImage = ImageFactory.fromResource(R.drawable.ic_location_marker)
+        )
+        mapFragment.getMapAsync{
+                tomtomMap ->
+            this@propertyInfoActivity.tomTomMap = tomtomMap
+            tomTomMap.setFrameRate(24)
+            tomTomMap.setStyleMode(StyleMode.DARK)
+            val layers = tomTomMap.layers
+            tomTomMap.showHillShading()
+            val mapLocationProvider = tomTomMap.getLocationProvider()
+            val isLocationInVisibleArea = tomTomMap.isCurrentLocationInMapBoundingBox
+            val currentLocation: GeoLocation? = tomTomMap.currentLocation
+            val locationMarkerOptions = LocationMarkerOptions(
+                type = LocationMarkerOptions.Type.Chevron
+            )
+            tomTomMap.enableLocationMarker(locationMarkerOptions)
+            tomTomMap.locationAccuracyPolicy = LocationAccuracyPolicy { location: GeoLocation ->
+                val isAccurate = (location.accuracy?.inMeters() ?: 0.0) < 100.0
+                val isFresh = location.elapsedRealtimeNanos.nanoseconds >
+                        (SystemClock.elapsedRealtimeNanos().nanoseconds  - 60.seconds)
+
+                isAccurate && isFresh
+            }
+
+            tomtomMap.addMapClickListener { coordinate: GeoPoint ->
+
+                val newCameraOptions = CameraOptions(
+                    position = amsterdam,
+                    zoom = 15.0,
+                )
+                tomTomMap.moveCamera(newCameraOptions)
+                return@addMapClickListener true
+            }
+            tomtomMap.addMapDoubleClickListener { coordinate: GeoPoint ->
+                val newCameraOptions = CameraOptions(
+                    position = amsterdam,
+                    zoom = 20.0,
+                )
+                tomTomMap.moveCamera(newCameraOptions)
+                return@addMapDoubleClickListener true
+            }
+
+            tomtomMap.addMapLongClickListener { coordinate: GeoPoint ->
+                val newCameraOptions = CameraOptions(
+                    position = amsterdam,
+                    zoom = 10.0,
+                )
+                tomTomMap.moveCamera(newCameraOptions)
+                return@addMapLongClickListener true
+            }
+            tomtomMap.changeGestureExclusions(GestureType.Move, setOf(GestureType.Scale))
+            tomtomMap.changeGestureExclusions(GestureType.Move, setOf())
+            val cameraPosition = tomTomMap.cameraPosition
+
+            val markerOptions = MarkerOptions(
+                coordinate = amsterdam,
+                pinImage = ImageFactory.fromResource(R.drawable.ic_location_marker),
+                balloonText = "$propertyLocationAddressPinned"
+            )
+            this.tomTomMap.addMarker(markerOptions)
+            tomTomMap.addMarkerClickListener { marker: Marker ->
+                if (!marker.isSelected()) {
+                    marker.select()
+                }}
+
+            val amsterdam = GeoPoint(propertyLatitude, propertyLongitude)
+            val newCameraOptions = CameraOptions(
+                position = amsterdam,
+                zoom = 5.0,
+            )
+            tomTomMap.moveCamera(newCameraOptions)
+
+        }
+
+    }
+
+    private fun createChatDocument(currentUserUid: String, selectedUserUid: String) {
             var chatCollection = FirebaseFirestore.getInstance().collection("ChatsCollection")
             var chatData = hashMapOf(
                 "UserParticipants" to arrayListOf(currentUserUid, selectedUserUid),

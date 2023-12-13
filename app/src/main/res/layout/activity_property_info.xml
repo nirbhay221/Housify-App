@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -230,17 +230,62 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </LinearLayout>
 
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        -->
+<!--        android:id="@+id/map_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="200dp"/>-->
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map_container"
+        xmlns:tomtom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/map_fragment"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="300dp"
+        tomtom:mapKey="eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8"
+        tomtom:mapPaddingBottom="10"
+        tomtom:mapPaddingLeft="10"
+        tomtom:mapPaddingRight="10"
+        tomtom:mapPaddingTop="10"
+        tomtom:cameraTilt="45"
+        tomtom:cameraRotation="20"
+        tomtom:cameraPositionZoom="10"
+        tomtom:cameraPositionLatitude="52.379189"
+        tomtom:cameraPositionLongitude="4.899431"
+        tomtom:cameraBoundsTopLeftLatitude="52.379189"
+        tomtom:cameraBoundsTopLeftLongitude="4.899431"
+        tomtom:cameraBoundsBottomRightLatitude="51.89275"
+        tomtom:cameraBoundsBottomRightLongitude="5.67124"
+        tomtom:styleMode="Dark" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/zoomInOnMap"
+            android:layout_width="16dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="150dp"
+            android:src="@drawable/ic_add"></ImageView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/zoomOutOnMap"
+            android:src = "@drawable/ic_minus"
+            android:layout_marginLeft="10dp">
+
+        </ImageView>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
