@@ -20,6 +20,12 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.tomtom.sdk.location.GeoPoint
+import com.tomtom.sdk.map.display.MapOptions
+import com.tomtom.sdk.map.display.TomTomMap
+import com.tomtom.sdk.map.display.image.ImageFactory
+import com.tomtom.sdk.map.display.marker.MarkerOptions
+import com.tomtom.sdk.map.display.ui.MapFragment
 import com.tomtom.sdk.search.Search
 import com.tomtom.sdk.search.SearchCallback
 import com.tomtom.sdk.search.SearchOptions
@@ -40,6 +46,8 @@ class propertyInfoActivity : AppCompatActivity() {
     private lateinit var addUserToCurrentUserCollection: ImageView
     private lateinit var propUid: String
     private lateinit var phoneNumber: String
+
+    private lateinit var tomTomMap: TomTomMap
     private lateinit var userName : TextView
     private lateinit var callToUser : ImageView
 
@@ -60,6 +68,29 @@ class propertyInfoActivity : AppCompatActivity() {
         callToUser = findViewById(R.id.phoneUser)
         phoneNumbeListedWithUser = findViewById(R.id.propertyUserListedPhoneNumber)
 
+        val mapOptions = MapOptions(mapKey = "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8")
+        val mapFragment = MapFragment.newInstance(mapOptions)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.map_container, mapFragment)
+            .commit()
+        val amsterdam = GeoPoint(52.379189, 4.899431)
+        val markerOptions = MarkerOptions(
+            coordinate = amsterdam,
+            pinImage = ImageFactory.fromResource(R.drawable.ic_location_marker)
+        )
+        mapFragment.getMapAsync{
+                tomtomMap ->
+            this@propertyInfoActivity.tomTomMap = tomtomMap
+
+           val amsterdam = GeoPoint(52.379189, 4.899431)
+            val markerOptions = MarkerOptions(
+                coordinate = amsterdam,
+                pinImage = ImageFactory.fromResource(R.drawable.ic_location_marker)
+            )
+            tomTomMap.addMarker(markerOptions)
+            tomTomMap.zoomToMarkers()
+        }
         val searchApi = OnlineSearch.create(this, "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8")
 
 
@@ -240,7 +271,7 @@ class propertyInfoActivity : AppCompatActivity() {
             val firestore = FirebaseFirestore.getInstance()
             val usersCollection = firestore.collection("User")
             var userPhoneNumber = ""
-                if (uid != null) {
+            if (uid != null) {
                 usersCollection.document(uid).get().addOnSuccessListener { documentSnapshot ->
                     if (documentSnapshot.exists()) {
                         Toast.makeText(this,"It Enters.",Toast.LENGTH_LONG).show()
@@ -292,6 +323,7 @@ class propertyInfoActivity : AppCompatActivity() {
         var decodeByteArray = Base64.decode(base64, Base64.DEFAULT)
         return BitmapFactory.decodeByteArray(decodeByteArray,0,decodeByteArray.size)
     }
+
 }
 
 
