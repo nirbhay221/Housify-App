@@ -64,7 +64,11 @@ class propertyInfoActivity : AppCompatActivity() {
     private lateinit var userName : TextView
     private lateinit var callToUser : ImageView
     private lateinit var zoomIn : ImageView
-
+    private var sentFirstName: String = ""
+    private var sentLastName: String = ""
+    private var sentNumber: String = ""
+    private var sentUserImage: String = ""
+    private var sentUserUid: String = ""
 
     private var propertyLongitude:Double = 0.0
     private var propertyLatitude:Double = 0.0
@@ -194,13 +198,16 @@ class propertyInfoActivity : AppCompatActivity() {
 
             }
             addUserToCurrentUserCollection.setOnClickListener {
-                var fireStore = FirebaseFirestore.getInstance()
-                var currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
-                var selectedUserUid = propUid
-                if (currentUserUid != null && selectedUserUid != null) {
-                    addToChatCluster(currentUserUid, selectedUserUid)
-                    createChatDocument(currentUserUid, selectedUserUid)
-                }
+                sentNumber = getUserNameFromUid(propUserUid)
+                val intent = Intent(this, chatUserActivity::class.java)
+
+                intent.putExtra("sentFirstName", sentFirstName)
+                intent.putExtra("sentLastName", sentLastName)
+                intent.putExtra("sentNumber", sentNumber)
+                intent.putExtra("sentUserImage", sentUserImage)
+                intent.putExtra("sentUserUid", sentUserUid)
+
+                startActivity(intent)
 
 
             }
@@ -368,6 +375,11 @@ class propertyInfoActivity : AppCompatActivity() {
 
                         val userFirstName = documentSnapshot.getString("firstName")
                         val userLastName = documentSnapshot.getString("lastName")
+                        sentFirstName = userFirstName.toString()
+                        sentLastName = userLastName.toString()
+                        sentNumber = documentSnapshot.getString("number").toString()
+                        sentUserImage = documentSnapshot.getString("userImage").toString()
+                        sentUserUid  = documentSnapshot.getString("uid").toString()
                         userPhoneNumber= documentSnapshot.getString("number").toString()
                         phoneNumbeListedWithUser.text = userPhoneNumber
                         userName.text = userFirstName + " "+ userLastName

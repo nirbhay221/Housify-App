@@ -60,6 +60,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var popularProperties:popularPropertiesFragment
     private lateinit var allProperties:allPropertiesPostedFragment
     private lateinit var likedProperties: FavoritePropertySelectedFragment
+    private lateinit var filteredProperties:filteredPropertiesPostedFragment
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
@@ -81,6 +82,7 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         popularProperties = popularPropertiesFragment()
         allProperties = allPropertiesPostedFragment()
         likedProperties = FavoritePropertySelectedFragment()
+        filteredProperties = filteredPropertiesPostedFragment()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         locationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -186,6 +188,8 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         homeFragmentDivisionAdapter.addFragment(nearbyProperties, "Nearby")
         homeFragmentDivisionAdapter.addFragment(popularProperties, "Popular")
         homeFragmentDivisionAdapter.addFragment(likedProperties, "Liked")
+
+        homeFragmentDivisionAdapter.addFragment(filteredProperties, "Filtered")
         viewPager.adapter = homeFragmentDivisionAdapter
     }
 

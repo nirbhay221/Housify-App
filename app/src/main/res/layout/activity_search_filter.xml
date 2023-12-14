@@ -254,6 +254,12 @@
             />
 
     </LinearLayout>
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

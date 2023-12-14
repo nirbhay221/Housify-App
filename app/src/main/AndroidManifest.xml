@@ -27,6 +27,9 @@
         android:theme="@style/Theme.Material3.Light"
         tools:targetApi="31">
         <activity
+            android:name=".chatUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".searchFilterActivity"
             android:exported="false" />
         <activity
