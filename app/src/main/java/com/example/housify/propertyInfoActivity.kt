@@ -89,8 +89,6 @@ class propertyInfoActivity : AppCompatActivity() {
         addUserToCurrentUserCollection = findViewById(R.id.chatUserNow)
         userName = findViewById(R.id.usernameInfoPage)
         callToUser = findViewById(R.id.phoneUser)
-        zoomIn = findViewById(R.id.zoomInOnMap)
-        zoomOut = findViewById(R.id.zoomOutOnMap)
         phoneNumbeListedWithUser = findViewById(R.id.propertyUserListedPhoneNumber)
         val searchApi = OnlineSearch.create(this, "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8")
 

@@ -94,7 +94,7 @@ class TaskModel {
         this.taskTitle = taskTitle
         this.taskDescription = taskDescription
         this.taskDeadline = taskDeadline
-        this.taskRoommateId
+        this.taskRoommateId = taskRoommateId
     }
 
 }

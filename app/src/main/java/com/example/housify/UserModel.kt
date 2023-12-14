@@ -48,13 +48,16 @@ class UserModel {
         this.uid= userUid
     }
 
-    constructor(enteredFirstName: String, enteredLastName: String, enteredNumber: String)
+    constructor(enteredFirstName: String?, enteredLastName: String?, enteredNumber: String?)
     {
         this.firstName = firstName
         this.lastName = lastName
         this.number = number
     }
+    constructor(currentUserUid: String) {
+        this.uid = currentUserUid
+    }
 
-    constructor(currentUserUid: String)
+
 
 }
