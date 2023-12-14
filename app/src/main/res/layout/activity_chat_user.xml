@@ -8,7 +8,6 @@
     android:background="#F4F4F4"
     tools:context=".chatUserActivity">
 
-    <!-- Chat messages container -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
         android:layout_width="match_parent"
@@ -17,7 +16,6 @@
         android:padding="16dp"
         android:background="#FFFFFF"/>
 
-    <!-- User input and send button -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
