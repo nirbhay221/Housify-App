@@ -78,7 +78,9 @@ class personalStatsFragment : Fragment(R.layout.fragment_personal_stats) {
                                     "assignedUsers" to selectedUserWithMoney,
                                     "roommateGroupUid" to roommateGroupId
                                 )
-
+                                if (isUserInSelectedRoommateGroup(roommateGroupId)) {
+                                    fetchRoommatesFromGroup(roommateGroupId)
+                                }
                                 binding.addRoommateEventButton.setOnClickListener{
                                     fireStore.collection("eventStorage")
                                         .document(eventUid)
@@ -120,6 +122,48 @@ class personalStatsFragment : Fragment(R.layout.fragment_personal_stats) {
         EventChangeListener()
     }
 
+    private fun fetchRoommatesFromGroup(roommateGroupId: String?) {
+        roommateGroupId?.let {
+            fireStore.collection("Roommate")
+                .whereEqualTo("roommateGroupId", roommateGroupId)
+                .addSnapshotListener { value, error ->
+                    if (error != null) {
+                        Log.e("Firestore Error", error.message.toString())
+                        return@addSnapshotListener
+                    }
+
+                    userArrayList.clear()
+
+                    for (document in value?.documents.orEmpty()) {
+                        val roommatesArray = document.get("roommates") as? ArrayList<Map<String, Any>>
+
+                        if (roommatesArray != null) {
+                            for (roommate in roommatesArray) {
+                                val userModel = UserModel(
+                                    roommate["uid"].toString() as String,
+                                    roommate["firstName"].toString() as String,
+                                    roommate["lastName"].toString() as String,
+                                    roommate["number"].toString() as String,
+                                    roommate["userImage"].toString() as String,
+                                )
+                                userArrayList.add(userModel)
+                            }
+                        }
+                    }
+
+                    if (::eventUserAdapter.isInitialized) {
+                        eventUserAdapter.notifyDataSetChanged()
+                    }
+                }
+        }
+    }
+
+
+    private fun isUserInSelectedRoommateGroup(selectedRoommateGroupId: String?): Boolean {
+
+        return selectedRoommateGroupId != null && selectedRoommateGroupId.isNotEmpty()
+    }
+
     private fun EventChangeListener() {
         var currentUserUid= FirebaseAuth.getInstance().currentUser?.uid
         fireStore.collection("Roommate")
@@ -141,7 +185,6 @@ class personalStatsFragment : Fragment(R.layout.fragment_personal_stats) {
                                 val roommateGroupId = document.getString("roommateGroupId")
                                 val roommateGroupName = document.getString("roommateGroupName")
                                 val userModel = UserModel(
-
                                     roommate["uid"].toString() as String,
                                     roommate["firstName"].toString() as String,
                                     roommate["lastName"].toString() as String,
