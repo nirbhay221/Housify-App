@@ -54,6 +54,8 @@ class propertyInfoActivity : AppCompatActivity() {
     private lateinit var propertyBaths: TextView
     private lateinit var propertyType: TextView
     private lateinit var propertyYear: TextView
+    private lateinit var propertyRent: TextView
+    private lateinit var propertyArea: TextView
     private lateinit var propertyImages: ImageView
     private lateinit var propertyUid: TextView
     private lateinit var addUserToCurrentUserCollection: ImageView
@@ -88,6 +90,8 @@ class propertyInfoActivity : AppCompatActivity() {
         propertyBaths = findViewById(R.id.propertyBaths)
         propertyType = findViewById(R.id.propertyType)
         propertyYear = findViewById(R.id.propertyYear)
+        propertyArea = findViewById(R.id.propertyArea)
+        propertyRent = findViewById(R.id.propertyRent)
         propertyImages = findViewById<ImageView>(R.id.propertyImages)
         propertyUid = findViewById(R.id.propertyUidInfo)
         addUserToCurrentUserCollection = findViewById(R.id.chatUserNow)
@@ -193,7 +197,8 @@ class propertyInfoActivity : AppCompatActivity() {
 //                        Property Details
                         propertyBaths.text = document.getString("propertyBathrooms")
                         propertyBedrooms.text = document.getString("propertyBedrooms")
-
+                        propertyArea.text = document.getString("propertyArea")
+                        propertyRent.text = document.getString("propertyPrice")
 
                     }.addOnFailureListener { exception ->
                         Log.e("Property View Info", "Error getting property details", exception)

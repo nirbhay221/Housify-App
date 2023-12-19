@@ -85,9 +85,10 @@
             android:layout_gravity="center"
             android:text="1,200"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:text=" /month"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
