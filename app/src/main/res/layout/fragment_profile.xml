@@ -59,21 +59,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_person"
+            android:layout_marginTop="25dp"
             android:layout_marginLeft="50dp">
         </ImageView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Personal Details"
+            android:layout_marginTop="25dp"
             android:layout_marginLeft="50dp"
             android:textSize="18dp">
         </TextView>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow"
-            android:layout_marginLeft="80dp">
-        </ImageView>
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_arrow"></ImageView>
 
     </LinearLayout>
     <LinearLayout
@@ -122,14 +125,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Properties List"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="50dp"
             android:textSize="18dp">
         </TextView>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow"
-            android:layout_marginLeft="100dp">
+            android:layout_marginLeft="95dp">
         </ImageView>
 
     </LinearLayout>

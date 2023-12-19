@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.LightingColorFilter
 import android.location.Geocoder
 import android.os.Bundle
 import android.text.Editable
@@ -143,6 +144,9 @@ class homeFragment : Fragment(R.layout.fragment_home) {
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
+                val blueColorFilter = LightingColorFilter(0xFF0000FF.toInt(), 0)
+                binding.saveUserCurrentLocation.colorFilter = blueColorFilter
+
                 fusedLocationClient.requestLocationUpdates(
                     locationRequest,
                     locationCallback,
