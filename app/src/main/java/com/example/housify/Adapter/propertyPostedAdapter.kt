@@ -49,6 +49,8 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
 
                 }
         }
+
+        holder.propertyType.text  = property.propertyType
         holder.propertyTitle.text = property.propertyTitle
         holder.propertyAddress.text = property.propertyAddress
         holder.propertyPrice.text ="$ "+ property.propertyPrice
@@ -159,6 +161,7 @@ class propertyPostedAdapter (private val propertyList: ArrayList<propertyModel>)
 
     public class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
+        val propertyType : TextView = itemView.findViewById(R.id.propertyPostedType)
         val propertyTitle : TextView = itemView.findViewById(R.id.apartmentPostedTitleName)
         val propertyAddress : TextView = itemView.findViewById(R.id.apartmentPostedLocation)
         val propertyPrice : TextView = itemView.findViewById(R.id.propertyPostedApartmentPrice)
