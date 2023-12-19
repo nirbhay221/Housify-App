@@ -74,6 +74,24 @@
             android:layout_weight="1"
             android:hint="Enter Event Description"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Transaction Amount: " />
+
+        <EditText
+            android:id="@+id/eventTransactionAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:hint="Enter Event Transaction Amount"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

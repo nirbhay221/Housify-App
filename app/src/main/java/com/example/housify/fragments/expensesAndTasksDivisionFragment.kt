@@ -19,7 +19,7 @@ class expensesAndTasksDivisionFragment : Fragment(R.layout.fragment_expenses_tas
     private lateinit var roommateGroupStats : roommateFragment
     private lateinit var tasksStats: tasksFragment
     private lateinit var expensesAndTasksFragmentDivisionAdapter: ExpensesAndTasksFragmentDivisionAdapter
-
+    private lateinit var eventStats: eventListViewFragment
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +37,7 @@ class expensesAndTasksDivisionFragment : Fragment(R.layout.fragment_expenses_tas
         personalStats = personalStatsFragment()
         roommateGroupStats = roommateFragment()
         tasksStats = tasksFragment()
+        eventStats  = eventListViewFragment()
         setupViewPager(binding.viewPagerExpensesAndTasks)
         binding.tabLayoutExpensesAndTasks.setupWithViewPager(binding.viewPagerExpensesAndTasks)
         binding.tabLayoutExpensesAndTasks.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -58,6 +59,7 @@ class expensesAndTasksDivisionFragment : Fragment(R.layout.fragment_expenses_tas
         expensesAndTasksFragmentDivisionAdapter.addFragment(roommateGroupStats, "Roommates")
         expensesAndTasksFragmentDivisionAdapter.addFragment(expensesStats, "Expenses")
         expensesAndTasksFragmentDivisionAdapter.addFragment(tasksStats, "Tasks")
+        expensesAndTasksFragmentDivisionAdapter.addFragment(eventStats, "Events")
         viewPager.adapter = expensesAndTasksFragmentDivisionAdapter
     }
 

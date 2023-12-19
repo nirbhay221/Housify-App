@@ -27,6 +27,12 @@ class eventModel {
         set(value) {
             field = value ?: ""
         }
+    var eventTransaction: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
     var assignedUsers: MutableList<Pair<UserModel,String>> = mutableListOf()
 
     constructor()
@@ -35,6 +41,7 @@ class eventModel {
         eventTitle: String?,
         eventDescription: String?,
         eventRoommateId: String?,
+        eventTransaction: String?,
         assignedUsers: MutableList<Pair<UserModel,String>>,
 
         ) {
@@ -42,18 +49,22 @@ class eventModel {
         this.eventTitle = eventTitle
         this.eventDescription = eventDescription
         this.eventRoommateId = eventRoommateId
+
+        this.eventTransaction = eventTransaction
         this.assignedUsers = assignedUsers
     }
     constructor(
         eventId: String?,
         eventTitle: String?,
         eventDescription: String?,
-        eventRoommateId: String?)
+        eventRoommateId: String?,
+        eventTransaction: String?)
     {
         this.eventId = eventId
         this.eventTitle = eventTitle
         this.eventDescription = eventDescription
         this.eventRoommateId = eventRoommateId
+        this.eventTransaction = eventTransaction
     }
 
 

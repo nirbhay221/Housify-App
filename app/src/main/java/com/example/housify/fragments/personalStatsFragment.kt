@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,11 +38,13 @@ class personalStatsFragment : Fragment(R.layout.fragment_personal_stats) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         var currentUserUid= FirebaseAuth.getInstance().currentUser?.uid
         var eventUid = fireStore.generateUniqueId()
         var eventTitle = binding.eventTitle.text.toString()
         var eventDescription = binding.eventDescription.text.toString()
+        var eventTransactionAmount = binding.eventTransactionAmount.text.toString()
 
         recyclerView = binding.userEventRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -73,8 +76,9 @@ class personalStatsFragment : Fragment(R.layout.fragment_personal_stats) {
                                 binding.eventRoommateGroupName.text =  Editable.Factory.getInstance().newEditable(roommateGroupName)
                                 val updatedEvent = hashMapOf(
                                     "eventId" to eventUid,
-                                    "taskTitle" to eventTitle,
-                                    "taskDescription" to eventDescription,
+                                    "eventTitle" to eventTitle,
+                                    "eventDescription" to eventDescription,
+                                    "eventTransactionAmount" to eventTransactionAmount,
                                     "assignedUsers" to selectedUserWithMoney,
                                     "roommateGroupUid" to roommateGroupId
                                 )
@@ -82,20 +86,38 @@ class personalStatsFragment : Fragment(R.layout.fragment_personal_stats) {
                                     fetchRoommatesFromGroup(roommateGroupId)
                                 }
                                 binding.addRoommateEventButton.setOnClickListener{
+                                    val eventUid = fireStore.generateUniqueId()
+                                    val eventTitle = binding.eventTitle.text.toString()
+                                    val eventDescription = binding.eventDescription.text.toString()
+                                    val eventTransactionAmount = binding.eventTransactionAmount.text.toString()
+                                    val selectedUserWithMoney = eventUserAdapter.getSelectedUsersWithMoney()
+
+                                    val updatedEvent = hashMapOf(
+                                        "eventId" to eventUid,
+                                        "eventTitle" to eventTitle,
+                                        "eventDescription" to eventDescription,
+                                        "eventTransactionAmount" to eventTransactionAmount,
+                                        "assignedUsers" to selectedUserWithMoney,
+                                        "roommateGroupUid" to roommateGroupId
+                                    )
+
+                                    if (isUserInSelectedRoommateGroup(roommateGroupId)) {
+                                        fetchRoommatesFromGroup(roommateGroupId)
+                                    }
                                     fireStore.collection("eventStorage")
                                         .document(eventUid)
                                         .set(updatedEvent)
                                         .addOnSuccessListener {
                                             Toast.makeText(
                                                 requireContext(),
-                                                "Task added successfully to $eventTitle",
+                                                "Event added successfully to $eventTitle",
                                                 Toast.LENGTH_LONG
                                             ).show()
 
                                         }.addOnFailureListener { e ->
                                             Toast.makeText(
                                                 requireContext(),
-                                                "Error adding task: ${e.message}",
+                                                "Error adding event: ${e.message}",
                                                 Toast.LENGTH_LONG
                                             ).show()
                                         }

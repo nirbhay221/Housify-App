@@ -193,7 +193,6 @@ class homeFragment : Fragment(R.layout.fragment_home) {
         homeFragmentDivisionAdapter.addFragment(popularProperties, "Popular")
         homeFragmentDivisionAdapter.addFragment(likedProperties, "Liked")
 
-        homeFragmentDivisionAdapter.addFragment(filteredProperties, "Filtered")
         viewPager.adapter = homeFragmentDivisionAdapter
     }
 
