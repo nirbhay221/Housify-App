@@ -55,6 +55,7 @@ class propertyInfoActivity : AppCompatActivity() {
     private lateinit var propertyType: TextView
     private lateinit var propertyYear: TextView
     private lateinit var propertyRent: TextView
+    private lateinit var propertyRoommates: TextView
     private lateinit var propertyArea: TextView
     private lateinit var propertyImages: ImageView
     private lateinit var propertyUid: TextView
@@ -92,6 +93,7 @@ class propertyInfoActivity : AppCompatActivity() {
         propertyYear = findViewById(R.id.propertyYear)
         propertyArea = findViewById(R.id.propertyArea)
         propertyRent = findViewById(R.id.propertyRent)
+        propertyRoommates = findViewById(R.id.propertyTotalRoommates)
         propertyImages = findViewById<ImageView>(R.id.propertyImages)
         propertyUid = findViewById(R.id.propertyUidInfo)
         addUserToCurrentUserCollection = findViewById(R.id.chatUserNow)
@@ -201,6 +203,7 @@ class propertyInfoActivity : AppCompatActivity() {
                         propertyRent.text = document.getString("propertyPrice")
                         propertyYear.text = document.getString("propertyYear")
                         propertyType.text = document.getString("propertyType")
+                        propertyRoommates.text = document.getString("propertyTotalRoommatesNeeded")
 
                     }.addOnFailureListener { exception ->
                         Log.e("Property View Info", "Error getting property details", exception)
