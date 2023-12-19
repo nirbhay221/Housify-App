@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="Roommates"
                 android:textStyle="bold"
-                android:textColor="@color/Like"
+                android:textColor="#FF000000"
                 android:layout_marginStart="10dp"
                 android:textSize="12sp"></TextView>
         </LinearLayout>
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="Chat"
                 android:textStyle="bold"
-                android:textColor="@color/Chat"
+                android:textColor="#FF000000"
                 android:layout_marginStart="10dp"
                 android:textSize="12sp"></TextView>
         </LinearLayout>
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:text="Profile"
                 android:textStyle="bold"
-                android:textColor="@color/Profile"
+                android:textColor="#FF000000"
                 android:layout_marginStart="10dp"
                 android:textSize="12sp"></TextView>
         </LinearLayout>
