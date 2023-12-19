@@ -4,21 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".PropertyAddViewActivity">
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text = "List new property"
+        android:text="List New Property"
         android:textStyle="bold"
-        android:textSize="30dp">
-
-    </EditText>
+        android:textSize="30dp"
+        android:padding="8dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_margin="8dp"
@@ -39,6 +36,7 @@
 
         <Spinner
             android:id="@+id/propertyTypeInfo"
+            android:layout_marginLeft="7dp"
             android:layout_width="195dp"
             android:layout_height="65dp">
 
@@ -87,8 +85,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/propertyTotalBedrooms"
-            android:layout_width="200dp"
-            android:layout_height="65dp"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
             android:hint="Total Bedrooms" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -139,7 +137,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+            android:layout_width="304dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
 
@@ -148,6 +146,16 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:hint="Address and Location" />
+
+            <Button
+                android:id="@+id/getCurrentLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="15dp"
+                android:text="Current Location">
+
+            </Button>
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -301,7 +309,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add"
+        android:text="Add"
         android:id="@+id/addAdditionalFacility"
         android:onClick="sendMessage"
         android:background="#000000"
@@ -326,6 +334,7 @@
         android:scaleType="centerInside"
         android:cropToPadding="true"
         android:background="@color/black"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"/>
 
     <ImageButton
@@ -334,6 +343,7 @@
         android:layout_height="wrap_content"
         android:text="Capture Image"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="35dp"
         android:src = "@drawable/ic_camera"/>
 
     <ImageButton
@@ -341,6 +351,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upload Image"
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="10dp"
         android:src = "@drawable/ic_image_upload"/>
     <Button
@@ -349,16 +360,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:text="SUBMIT">
-
-    </Button>
-
-    <Button
-        android:id="@+id/getCurrentLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:text="Current Location">
 
     </Button>
 
