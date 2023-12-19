@@ -17,10 +17,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = " Apartment"
+                android:text=" Apartment"
+                android:id = "@+id/propertyTypePostedList"
                 android:textSize="13dp"
                 android:textStyle="bold">
 

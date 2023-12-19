@@ -21,6 +21,7 @@ class propertyListAdapter(private val propertyList: ArrayList<propertyModel>): R
         val property: propertyModel = propertyList[position]
         holder.propertyTitle.text = property.propertyTitle
         holder.propertyPrice.text = property.propertyPrice
+        holder.propertyType.text = property.propertyType
     }
 
     override fun getItemCount(): Int {
@@ -30,6 +31,7 @@ class propertyListAdapter(private val propertyList: ArrayList<propertyModel>): R
     public class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val propertyTitle : TextView = itemView.findViewById(R.id.apartmentTitleName)
         val propertyPrice : TextView = itemView.findViewById(R.id.apartmentPrice)
+        val propertyType : TextView = itemView.findViewById(R.id.propertyTypePostedList)
 
     }
 }
