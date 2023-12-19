@@ -210,7 +210,10 @@ class propertyInfoActivity : AppCompatActivity() {
                         propertyType.text = document.getString("propertyType")
                         propertyRoommates.text = document.getString("propertyTotalRoommatesNeeded")
                         propertyDescription.text = document.getString("propertyDescription")
-                        propertyAmenities.text = (document.get("propertyFacilities") as? ArrayList<String>).toString()
+//                        var amenities = (document.get("propertyFacilities") as? ArrayList<Map<String, Any>>
+                        var amenities = (document.get("propertyFacilities") as? ArrayList<String>).toString()
+                        amenities = amenities.substring(1, amenities.length - 1);
+                        propertyAmenities.text = amenities
 
                     }.addOnFailureListener { exception ->
                         Log.e("Property View Info", "Error getting property details", exception)
