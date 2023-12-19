@@ -101,6 +101,28 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif-condensed"
+        android:text="Description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/propertyDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Property Description."
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="Details"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold" />
@@ -141,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:text="Location"
+            android:text="Address"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         <TextView
             android:id="@+id/propertyLocation"
@@ -261,6 +283,7 @@
         android:id="@+id/map_fragment"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_marginTop="20dp"
         tomtom:mapKey="eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8"
         tomtom:mapPaddingBottom="10"
         tomtom:mapPaddingLeft="10"

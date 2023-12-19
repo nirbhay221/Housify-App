@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ClipDescription
 
 import android.util.Base64
 import android.util.Log
@@ -50,6 +51,7 @@ class propertyInfoActivity : AppCompatActivity() {
 
     private lateinit var propertyLocation: TextView
     private lateinit var propertyTitle: TextView
+    private lateinit var propertyDescription: TextView
     private lateinit var propertyBedrooms: TextView
     private lateinit var propertyBaths: TextView
     private lateinit var propertyType: TextView
@@ -86,6 +88,7 @@ class propertyInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property_info)
         propertyTitle = findViewById(R.id.propertyTitle)
+        propertyDescription = findViewById(R.id.propertyDescription)
         propertyLocation = findViewById(R.id.propertyLocation)
         propertyBedrooms = findViewById(R.id.propertyBedrooms)
         propertyBaths = findViewById(R.id.propertyBaths)
@@ -204,6 +207,7 @@ class propertyInfoActivity : AppCompatActivity() {
                         propertyYear.text = document.getString("propertyYear")
                         propertyType.text = document.getString("propertyType")
                         propertyRoommates.text = document.getString("propertyTotalRoommatesNeeded")
+                        propertyDescription.text = document.getString("propertyDescription")
 
                     }.addOnFailureListener { exception ->
                         Log.e("Property View Info", "Error getting property details", exception)
