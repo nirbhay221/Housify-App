@@ -256,6 +256,54 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
             val propertyAddress = binding.propertyAddressInfo.text.toString()
             val propertyPasscode = binding.propertyPasscodeInfo.text.toString()
             val propertyDescription = binding.propertyDescriptionInfo.text.toString()
+            val propertyBuiltYear = binding.propertyYearInfo.text.toString()
+            val propertyArea = binding.propertyAreaInfo.text.toString()
+            val propertyTotalBedrooms = binding.propertyTotalBedrooms.text.toString()
+            val propertyTotalBathrooms = binding.propertyTotalBathrooms.text.toString()
+            val propertyPriceMonthlyOrAnnually = binding.propertyPriceMonthlyOrAnnuallyInfo.text.toString()
+            val propertyTotalRoommates = binding.propertyTotalRoommates.text.toString()
+            var selectedFacilitiesList = mutableListOf<String>()
+            val facilityParking = binding.facilityParking.isChecked
+            val facilityGas = binding.facilityGas.isChecked
+            val facilityWifi= binding.facilityWifi.isChecked
+            val facilitySecurity = binding.facilitySecurity.isChecked
+            val facilityKitchen = binding.facilityKitchen.isChecked
+            val facilityAirConditioner = binding.facilityAirConditioner.isChecked
+            val facilityPetFriendly = binding.facilityPetFriendly.isChecked
+            val facilityElectricity = binding.facilityElectricity.isChecked
+            val facilitySelfCheckIn = binding.facilitySelfCheckIn.isChecked
+            val facilityHeating = binding.facilityHeating.isChecked
+            val facilityElevator = binding.facilityElevator.isChecked
+            if(facilityParking){
+                selectedFacilitiesList.add("Parking")
+            }
+            if(facilityGas){
+                selectedFacilitiesList.add("Gas")
+            }
+            if(facilityWifi){
+                selectedFacilitiesList.add("Wifi")
+            }
+            if(facilitySecurity){
+                selectedFacilitiesList.add("Security")
+            }
+            if(facilityKitchen){
+                selectedFacilitiesList.add("Kitchen")
+            }
+            if(facilityAirConditioner){
+                selectedFacilitiesList.add("Air-Conditioner")
+            }
+            if(facilityPetFriendly){
+                selectedFacilitiesList.add("Pet-Friendly")
+            }
+            if(facilitySelfCheckIn){
+                selectedFacilitiesList.add("Self-Check-In")
+            }
+            if(facilityHeating){
+                selectedFacilitiesList.add("Heating")
+            }
+            if(facilityElevator){
+                selectedFacilitiesList.add("Elevator")
+            }
 
             val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
             Toast.makeText(requireContext(),"$currentUserUid",Toast.LENGTH_LONG).show()
@@ -271,7 +319,14 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
                     propertyPasscode,
                     propertyPrice,
                     propertyDescription,
-                    currentUserUid
+                    currentUserUid,
+                    propertyBuiltYear,
+                    propertyArea,
+                    propertyPriceMonthlyOrAnnually,
+                    propertyTotalBedrooms,
+                    propertyTotalBathrooms,
+                    propertyTotalRoommates,
+                    selectedFacilitiesList
                 )
 
                 if (propertyImageBase64Converted != null) {

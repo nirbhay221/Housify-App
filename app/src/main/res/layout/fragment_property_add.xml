@@ -44,17 +44,93 @@
 
         </Spinner>
 
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/propertyYearInfo"
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:hint="Property Built Year" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/propertyAreaInfo"
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:hint="Property Area" />
+    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/propertyTotalBedrooms"
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:hint="Total Bedrooms" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/propertyTotalBathrooms"
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:hint="Total Bathrooms" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/propertyPriceInfo"
+            android:layout_width="200dp"
+            android:layout_height="65dp"
+            android:hint="Price" />
+    </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/propertyPriceInfo"
+                android:id="@+id/propertyPriceMonthlyOrAnnuallyInfo"
                 android:layout_width="200dp"
                 android:layout_height="65dp"
-                android:hint="Price" />
+                android:hint="PriceMonthlyOrAnnually" />
         </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -75,6 +151,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/propertyTotalRoommates"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="Total Roommates" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -102,6 +189,107 @@
             android:layout_height="80dp"
             android:hint="Description" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Property Facilities"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+
+        <CheckBox
+            android:id="@+id/facilityParking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parking"/>
+
+        <CheckBox
+            android:id="@+id/facilitySecurity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Security"/>
+
+        <CheckBox
+            android:id="@+id/facilityWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wifi"/>
+        <CheckBox
+            android:id="@+id/facilityGas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gas"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+        <CheckBox
+            android:id="@+id/facilityKitchen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kitchen"/>
+        <CheckBox
+            android:id="@+id/facilityAirConditioner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AirConditioner"/>
+        <CheckBox
+            android:id="@+id/facilityPetFriendly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pet-Friendly"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+        <CheckBox
+            android:id="@+id/facilityElectricity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Electricity"/>
+        <CheckBox
+            android:id="@+id/facilitySelfCheckIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Self Check In" />
+
+        <CheckBox
+            android:id="@+id/facilityHeating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heating"/>
+        <CheckBox
+            android:id="@+id/facilityElevator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elevator"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp">
+
+
+    </LinearLayout>
     <ImageView
         android:id="@+id/propertyProfileImage"
         android:layout_width="120dp"
