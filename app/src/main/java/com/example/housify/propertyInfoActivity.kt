@@ -199,6 +199,8 @@ class propertyInfoActivity : AppCompatActivity() {
                         propertyBedrooms.text = document.getString("propertyBedrooms")
                         propertyArea.text = document.getString("propertyArea")
                         propertyRent.text = document.getString("propertyPrice")
+                        propertyYear.text = document.getString("propertyYear")
+                        propertyType.text = document.getString("propertyType")
 
                     }.addOnFailureListener { exception ->
                         Log.e("Property View Info", "Error getting property details", exception)
