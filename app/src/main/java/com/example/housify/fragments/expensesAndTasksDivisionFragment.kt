@@ -56,9 +56,9 @@ class expensesAndTasksDivisionFragment : Fragment(R.layout.fragment_expenses_tas
 
         expensesAndTasksFragmentDivisionAdapter = ExpensesAndTasksFragmentDivisionAdapter(childFragmentManager)
         expensesAndTasksFragmentDivisionAdapter.addFragment(personalStats, "Home")
-        expensesAndTasksFragmentDivisionAdapter.addFragment(roommateGroupStats, "Roommates")
-        expensesAndTasksFragmentDivisionAdapter.addFragment(expensesStats, "Expenses")
-        expensesAndTasksFragmentDivisionAdapter.addFragment(tasksStats, "Tasks")
+        expensesAndTasksFragmentDivisionAdapter.addFragment(roommateGroupStats, "Create Group")
+        expensesAndTasksFragmentDivisionAdapter.addFragment(expensesStats, "View Tasks")
+        expensesAndTasksFragmentDivisionAdapter.addFragment(tasksStats, "Add Task")
         expensesAndTasksFragmentDivisionAdapter.addFragment(eventStats, "Events")
         viewPager.adapter = expensesAndTasksFragmentDivisionAdapter
     }
