@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.housify.Models.TaskModel
 import com.example.housify.Models.chatModel
@@ -43,7 +44,10 @@ class chatListViewAdapter(private val chatList: ArrayList<chatModel>): RecyclerV
             }
             .addOnFailureListener { e ->
                 Log.e("Firestore Query", "Error getting user document: ${e.message}")
+
             }
+
+
     }
 
     override fun getItemCount(): Int {
@@ -53,4 +57,31 @@ class chatListViewAdapter(private val chatList: ArrayList<chatModel>): RecyclerV
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var chatRecipientName: TextView = itemView.findViewById(R.id.chatUserSearchName)
     }
+
+    private fun getUserNameFromUid(uid: String):String {
+        val firestore = FirebaseFirestore.getInstance()
+        val usersCollection = firestore.collection("User")
+        var sentFirstName:String
+        var sentLastName:String
+        var sentNumber: String
+        var sentUserUid: String
+        var userPhoneNumber = ""
+        if (uid != null) {
+            usersCollection.document(uid).get().addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val userFirstName = documentSnapshot.getString("firstName")
+                    val userLastName = documentSnapshot.getString("lastName")
+                    sentFirstName = userFirstName.toString()
+                    sentLastName = userLastName.toString()
+                    sentNumber = documentSnapshot.getString("number").toString()
+                    sentUserUid  = documentSnapshot.getString("uid").toString()
+                    userPhoneNumber= documentSnapshot.getString("number").toString()
+
+                }
+            }
+            return userPhoneNumber
+        }
+        return userPhoneNumber
+    }
+
 }
