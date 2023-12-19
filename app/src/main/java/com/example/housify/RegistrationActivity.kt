@@ -33,6 +33,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 import java.io.File
 
+// user signup and registration activity
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var email:TextInputEditText
     private lateinit var password:TextInputEditText

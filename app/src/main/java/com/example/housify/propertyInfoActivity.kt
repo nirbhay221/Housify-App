@@ -47,6 +47,7 @@ import kotlin.properties.Delegates
 import kotlin.time.Duration.Companion.nanoseconds
 import kotlin.time.Duration.Companion.seconds
 
+// Property view information activity
 class propertyInfoActivity : AppCompatActivity() {
 
     private lateinit var propertyLocation: TextView

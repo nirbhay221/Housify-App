@@ -21,7 +21,7 @@ import com.example.housify.fragments.homeFragment
 import com.example.housify.fragments.profileFragment
 import com.example.housify.viewModels.HomeViewModel
 import com.example.housify.viewModels.NavigationViewModel
-
+// Navigation activity for switching between home, roommates, settings, chat menus
 class NavigationActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<NavigationViewModel>()

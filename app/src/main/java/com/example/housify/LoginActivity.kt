@@ -21,6 +21,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
+// Login to app using username/password or google auth
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var email: TextInputEditText

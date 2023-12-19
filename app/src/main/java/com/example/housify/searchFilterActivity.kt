@@ -8,7 +8,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import com.example.housify.fragments.filteredPropertiesPostedFragment
 import com.google.android.material.chip.Chip
-
+// Search and Filter functionality for properties
 class searchFilterActivity : AppCompatActivity() {
     private lateinit var showResultsButton: Button
     private lateinit var House:Chip

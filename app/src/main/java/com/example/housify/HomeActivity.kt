@@ -15,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
+// Home page activity, lists properties and search filters
+// has fragments for liked property, nearby
 class HomeActivity : AppCompatActivity() {
     private val viewModel by viewModels<HomeViewModel>()
 
