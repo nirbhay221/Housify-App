@@ -20,7 +20,7 @@ class propertyListAdapter(private val propertyList: ArrayList<propertyModel>): R
     override fun onBindViewHolder(holder: propertyListAdapter.MyViewHolder, position: Int) {
         val property: propertyModel = propertyList[position]
         holder.propertyTitle.text = property.propertyTitle
-        holder.propertyPrice.text = property.propertyPrice
+        holder.propertyPrice.text = "$ " + property.propertyPrice
         holder.propertyType.text = property.propertyType
     }
 
