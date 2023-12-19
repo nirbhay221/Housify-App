@@ -190,6 +190,11 @@ class propertyInfoActivity : AppCompatActivity() {
                             Log.d("Property View Info", "Property details not found")
                         }
 
+//                        Property Details
+                        propertyBaths.text = document.getString("propertyBathrooms")
+                        propertyBedrooms.text = document.getString("propertyBedrooms")
+
+
                     }.addOnFailureListener { exception ->
                         Log.e("Property View Info", "Error getting property details", exception)
                     }
