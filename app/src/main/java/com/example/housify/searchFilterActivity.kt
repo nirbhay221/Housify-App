@@ -3,7 +3,9 @@ package com.example.housify
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.housify.fragments.allPropertiesPostedFragment
+import android.widget.ImageView
+import android.widget.SeekBar
+import android.widget.TextView
 import com.example.housify.fragments.filteredPropertiesPostedFragment
 import com.google.android.material.chip.Chip
 
@@ -25,7 +27,10 @@ class searchFilterActivity : AppCompatActivity() {
     private lateinit var security : Chip
     private lateinit var furnished: Chip
     private lateinit var television:Chip
-
+    private lateinit var priceRangeText : TextView
+    private var seekBarVal = 0.0
+    private lateinit var refreshText : TextView
+    private lateinit var resetSearchChoice: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_filter)
@@ -47,13 +52,47 @@ class searchFilterActivity : AppCompatActivity() {
         security = findViewById(R.id.chipSecurity)
         furnished = findViewById(R.id.chipFurnished)
         television = findViewById(R.id.chipTV)
+        refreshText = findViewById(R.id.textViewPropertyRefreshText)
+        resetSearchChoice = findViewById(R.id.resetSearchChoices)
 
+        var selectedPropertyTypes = mutableListOf<String>()
+
+        var selectedPropertyMoneyTypes = mutableListOf<String>()
+
+        var selectedPropertyFacilities = mutableListOf<String>()
+
+        var priceRangeSeekBar = findViewById<SeekBar>(R.id.priceRangeSeekBar)
+        priceRangeText = findViewById(R.id.priceRangeTextValue)
+        priceRangeSeekBar.max = 100
+        priceRangeSeekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    seekBarVal  = progress.toDouble()
+                    updateTextViews(seekBarVal,selectedPropertyTypes,selectedPropertyMoneyTypes,selectedPropertyFacilities)
+
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+        })
+        refreshText.setOnClickListener{
+            val intent = intent
+            finish()
+            startActivity(intent)
+        }
+        resetSearchChoice.setOnClickListener{
+            val intent = intent
+            finish()
+            startActivity(intent)
+        }
         showResultsButton.setOnClickListener{
-            var selectedPropertyTypes = mutableListOf<String>()
-
-            var selectedPropertyMoneyTypes = mutableListOf<String>()
-
-            var selectedPropertyFacilities = mutableListOf<String>()
 
             if(House.isChecked){
                 selectedPropertyTypes.add("House")
@@ -103,6 +142,7 @@ class searchFilterActivity : AppCompatActivity() {
             if(television.isChecked){
                 selectedPropertyFacilities.add("TV")
             }
+
             val bundle = Bundle()
             bundle.putStringArrayList("selectedPropertyTypes", ArrayList(selectedPropertyTypes))
             bundle.putStringArrayList("selectedPropertyMoneyTypes", ArrayList(selectedPropertyMoneyTypes))
@@ -111,6 +151,11 @@ class searchFilterActivity : AppCompatActivity() {
             val allPropertiesFragment = filteredPropertiesPostedFragment()
             allPropertiesFragment.arguments = bundle
 
+            bundle.putDouble("seekBarValue",seekBarVal?:0.0)
+            bundle.putStringArrayList("selectedPropertyTypes", ArrayList(selectedPropertyTypes))
+            bundle.putStringArrayList("selectedPropertyMoneyTypes", ArrayList(selectedPropertyMoneyTypes))
+            bundle.putStringArrayList("selectedPropertyFacilities", ArrayList(selectedPropertyFacilities))
+
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, allPropertiesFragment)
                 .addToBackStack(null)
@@ -118,5 +163,13 @@ class searchFilterActivity : AppCompatActivity() {
 
 
         }
+    }
+
+    private fun updateTextViews(seekBar: Double?,selectedPropertyTypes:MutableList<String>,selectedPropertyMoneyTypes:MutableList<String>,selectedPropertyFacilities:MutableList<String>) {
+
+        val formattedValue = String.format("%.1f", seekBar)
+        priceRangeText.text = "Price Range: 0 $ - ${formattedValue} k $"
+
+
     }
 }

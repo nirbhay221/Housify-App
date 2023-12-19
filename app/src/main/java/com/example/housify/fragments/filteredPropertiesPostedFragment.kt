@@ -36,6 +36,8 @@ class filteredPropertiesPostedFragment: Fragment(R.layout.fragment_filtered_prop
     private var selectedPropertyFacilities: List<String>? = null
     private var showAllPropertyTypes:Boolean= false
 
+    private var selectedPropertyPriceRange: Double = 0.0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,12 +60,14 @@ class filteredPropertiesPostedFragment: Fragment(R.layout.fragment_filtered_prop
         recyclerView.adapter = PropertyPostedAdapter
         binding.filteredPropertyPostedRetrieveList
         arguments?.let {
+            selectedPropertyPriceRange = it.getDouble("seekBarValue")
             selectedPropertyTypes = it.getStringArrayList("selectedPropertyTypes")
             selectedPropertyMoneyTypes = it.getStringArrayList("selectedPropertyMoneyTypes")
             selectedPropertyFacilities = it.getStringArrayList("selectedPropertyFacilities")
         }
-        Toast.makeText(requireContext(),"$selectedPropertyTypes",Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(),"$selectedPropertyPriceRange",Toast.LENGTH_LONG).show()
         showAllPropertyTypes = selectedPropertyTypes.toString() == "[Any]"
+
 
         EventChangeListener()
 
@@ -131,6 +135,9 @@ class filteredPropertiesPostedFragment: Fragment(R.layout.fragment_filtered_prop
                 }
                 return false
             }
+        }
+        if (property.propertyPrice!!.toDouble() > selectedPropertyPriceRange*1000) {
+            return false
         }
 
         return true
