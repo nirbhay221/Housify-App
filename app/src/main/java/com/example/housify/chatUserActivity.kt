@@ -62,6 +62,10 @@ class chatUserActivity : AppCompatActivity() {
                 .document(chatMessageUid)
                 .set(chat)
                 .addOnSuccessListener {
+                    chatList.add(chat)
+
+                    chatUserAdapter.notifyItemInserted(chatList.size - 1)
+
                     Toast.makeText(
                         this,
                         "Task added successfully to chat storage.",
