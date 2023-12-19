@@ -61,6 +61,7 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
+
     private var propertyImage: ImageView?=null
     private lateinit var propertyImageUploadButton:Button
     private lateinit var propertyImageCameraButton:Button
@@ -155,6 +156,7 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val searchApi = context?.let { OnlineSearch.create(it, "eXRlAZJos3TBi0kr7fSrXrp8Kl7Nt1e8") }
+        var additionalSelectedFacilityList = mutableListOf<String>()
         val autoCompleteCallback = object :AutocompleteCallback{
             override fun onSuccess(result: AutocompleteResponse) {
                 val predictionResult: List<AutocompleteResult>  = result.results
@@ -249,6 +251,13 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
                 requestLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
             }
         }
+        binding.addAdditionalFacility.setOnClickListener{
+            val additionFacility = binding.propertyAdditionalFacility.text.toString()
+            if(additionFacility.isNotEmpty())
+            { additionalSelectedFacilityList.add(additionFacility)
+            }
+        }
+
         binding.submitPropertyDetails.setOnClickListener {
             val propertyTitle = binding.propertyTitleInfo.text.toString()
             val propertyType = binding.propertyTypeInfo.selectedItem.toString()
@@ -305,6 +314,9 @@ class propertyAddFragment : Fragment(R.layout.fragment_property_add) {
                 selectedFacilitiesList.add("Elevator")
             }
 
+            if(additionalSelectedFacilityList.isNotEmpty()){
+                selectedFacilitiesList.addAll(additionalSelectedFacilityList)
+            }
             val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
             Toast.makeText(requireContext(),"$currentUserUid",Toast.LENGTH_LONG).show()
 
