@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +34,7 @@ class filteredPropertiesPostedFragment: Fragment(R.layout.fragment_filtered_prop
     private var selectedPropertyTypes: List<String>? = null
     private var selectedPropertyMoneyTypes: List<String>? = null
     private var selectedPropertyFacilities: List<String>? = null
+    private var showAllPropertyTypes:Boolean= false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,6 +62,8 @@ class filteredPropertiesPostedFragment: Fragment(R.layout.fragment_filtered_prop
             selectedPropertyMoneyTypes = it.getStringArrayList("selectedPropertyMoneyTypes")
             selectedPropertyFacilities = it.getStringArrayList("selectedPropertyFacilities")
         }
+        Toast.makeText(requireContext(),"$selectedPropertyTypes",Toast.LENGTH_LONG).show()
+        showAllPropertyTypes = selectedPropertyTypes.toString() == "[Any]"
 
         EventChangeListener()
 
@@ -88,15 +92,49 @@ class filteredPropertiesPostedFragment: Fragment(R.layout.fragment_filtered_prop
             }
         })
 
-    }
-
-    private fun isPropertyMatch(property: propertyModel): Boolean {
-        if(selectedPropertyTypes!= null && !selectedPropertyTypes!!.contains(property.propertyType))
-        {
-            return false
-
+    }private fun isPropertyMatch(property: propertyModel): Boolean {
+        if (showAllPropertyTypes) {
+            return true
         }
+
+        if (selectedPropertyTypes != null && !selectedPropertyTypes!!.contains(property.propertyType)) {
+            if(selectedPropertyMoneyTypes.toString() == "[Any]"){
+                return true
+            }
+            if(selectedPropertyFacilities.toString() == "[Any]"){
+                return true
+            }
+            return false
+        }
+
+        if (selectedPropertyMoneyTypes != null && selectedPropertyMoneyTypes!!.isNotEmpty() &&
+            !selectedPropertyMoneyTypes!!.contains(property.propertyRentMonthlyOrAnnually)
+        ) {
+            if(selectedPropertyMoneyTypes.toString() == "[Any]"){
+                return true
+            }
+            if(selectedPropertyFacilities.toString() == "[Any]"){
+                return true
+            }
+            return false
+        }
+
+        if (selectedPropertyFacilities != null && selectedPropertyFacilities!!.isNotEmpty()) {
+            val propertyFacilities = property.propertyFacilities
+            if (propertyFacilities == null || propertyFacilities.none { it in selectedPropertyFacilities!! }) {
+
+                if(selectedPropertyMoneyTypes.toString() == "[Any]"){
+                    return true
+                }
+                if(selectedPropertyFacilities.toString() == "[Any]"){
+                    return true
+                }
+                return false
+            }
+        }
+
         return true
     }
+
 
 }

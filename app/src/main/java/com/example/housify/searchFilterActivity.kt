@@ -68,7 +68,7 @@ class searchFilterActivity : AppCompatActivity() {
                 selectedPropertyTypes.add("Cabin")
             }
             if(Other.isChecked){
-            selectedPropertyTypes.add("Other")
+            selectedPropertyTypes.add("Any")
         }
             if(AnyPrice.isChecked){
             selectedPropertyMoneyTypes.add("Any")
@@ -77,7 +77,7 @@ class searchFilterActivity : AppCompatActivity() {
             selectedPropertyMoneyTypes.add("Monthly")
         }
             if(Anually.isChecked){
-            selectedPropertyMoneyTypes.add("Anually")
+            selectedPropertyMoneyTypes.add("Annually")
         }
             if(AnyFacilities.isChecked){
                 selectedPropertyFacilities.add("Any")
@@ -86,13 +86,13 @@ class searchFilterActivity : AppCompatActivity() {
             selectedPropertyFacilities.add("Kitchen")
         }
             if(SelfCheckIn.isChecked){
-            selectedPropertyFacilities.add("SelfCheckIn")
+            selectedPropertyFacilities.add("Self-Check-In")
         }
             if(freeParking.isChecked){
-                selectedPropertyFacilities.add("FreeParking")
+                selectedPropertyFacilities.add("Parking")
             }
             if(airConditioner.isChecked){
-                selectedPropertyFacilities.add("AirConditioner")
+                selectedPropertyFacilities.add("Air-Conditioner")
             }
             if(security.isChecked){
                 selectedPropertyFacilities.add("Security")
@@ -101,7 +101,7 @@ class searchFilterActivity : AppCompatActivity() {
                 selectedPropertyFacilities.add("Furnished")
             }
             if(television.isChecked){
-                selectedPropertyFacilities.add("Television")
+                selectedPropertyFacilities.add("TV")
             }
             val bundle = Bundle()
             bundle.putStringArrayList("selectedPropertyTypes", ArrayList(selectedPropertyTypes))
