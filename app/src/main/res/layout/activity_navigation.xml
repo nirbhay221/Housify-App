@@ -46,9 +46,10 @@
                 android:layout_height="wrap_content"
                 android:text="Home"
                 android:textStyle="bold"
-                android:textColor="@color/Home"
                 android:layout_marginStart="10dp"
-                android:textSize="12sp"></TextView>
+                android:textSize="12sp"
+                android:textColor="#FF000000">
+            </TextView>
         </LinearLayout>
         <LinearLayout
             android:id = "@+id/favoriteLayout"

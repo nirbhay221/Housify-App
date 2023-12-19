@@ -81,7 +81,7 @@ class NavigationActivity : AppCompatActivity() {
             profileLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
             homeTxt.visibility = View.VISIBLE
             homeImage.setImageResource(R.drawable.home_selected)
-            homeLayout.setBackgroundColor(R.drawable.round_home_button_ui)
+            homeLayout.setBackgroundResource(R.drawable.round_home_button_ui)
             var scaleAnim = ScaleAnimation(
                 0.0f,
                 1.0f,
@@ -110,7 +110,7 @@ class NavigationActivity : AppCompatActivity() {
             profileLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
             favoriteTxt.visibility = View.VISIBLE
             favoriteImage.setImageResource(R.drawable.favorite_selected)
-            favoriteLayout.setBackgroundColor(R.drawable.round_favorite_button_ui)
+            favoriteLayout.setBackgroundResource(R.drawable.round_favorite_button_ui)
             var scaleAnim = ScaleAnimation(
                 0.0f,
                 1.0f,
@@ -140,7 +140,7 @@ class NavigationActivity : AppCompatActivity() {
             profileLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
             chatTxt.visibility = View.VISIBLE
             chatImage.setImageResource(R.drawable.chat_selected)
-            chatLayout.setBackgroundColor(R.drawable.round_chat_button_ui)
+            chatLayout.setBackgroundResource(R.drawable.round_chat_button_ui)
             var scaleAnim = ScaleAnimation(
                 0.0f,
                 1.0f,
@@ -169,7 +169,7 @@ class NavigationActivity : AppCompatActivity() {
             homeLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
             profileTxt.visibility = View.VISIBLE
             profileImage.setImageResource(R.drawable.person_selected)
-            profileLayout.setBackgroundColor(R.drawable.round_person_button_ui)
+            profileLayout.setBackgroundResource(R.drawable.round_person_button_ui)
             var scaleAnim = ScaleAnimation(
                 0.0f,
                 1.0f,
@@ -201,7 +201,7 @@ class NavigationActivity : AppCompatActivity() {
                 profileLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
                 homeTxt.visibility = View.VISIBLE
                 homeImage.setImageResource(R.drawable.home_selected)
-                homeLayout.setBackgroundColor(R.drawable.round_home_button_ui)
+                homeLayout.setBackgroundResource(R.drawable.round_home_button_ui)
                 var scaleAnim = ScaleAnimation(
                     0.0f,
                     1.0f,
@@ -235,7 +235,7 @@ class NavigationActivity : AppCompatActivity() {
                 profileLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
                 favoriteTxt.visibility = View.VISIBLE
                 favoriteImage.setImageResource(R.drawable.favorite_selected)
-                favoriteLayout.setBackgroundColor(R.drawable.round_favorite_button_ui)
+                favoriteLayout.setBackgroundResource(R.drawable.round_favorite_button_ui)
                 var scaleAnim = ScaleAnimation(
                     0.0f,
                     1.0f,
@@ -269,7 +269,7 @@ class NavigationActivity : AppCompatActivity() {
                 profileLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
                 chatTxt.visibility = View.VISIBLE
                 chatImage.setImageResource(R.drawable.chat_selected)
-                chatLayout.setBackgroundColor(R.drawable.round_chat_button_ui)
+                chatLayout.setBackgroundResource(R.drawable.round_chat_button_ui)
                 var scaleAnim = ScaleAnimation(
                     0.0f,
                     1.0f,
@@ -303,7 +303,7 @@ class NavigationActivity : AppCompatActivity() {
                 homeLayout.setBackgroundColor(resources.getColor(android.R.color.transparent))
                 profileTxt.visibility = View.VISIBLE
                 profileImage.setImageResource(R.drawable.person_selected)
-                profileLayout.setBackgroundColor(R.drawable.round_person_button_ui)
+                profileLayout.setBackgroundResource(R.drawable.round_person_button_ui)
                 var scaleAnim = ScaleAnimation(
                     0.0f,
                     1.0f,
