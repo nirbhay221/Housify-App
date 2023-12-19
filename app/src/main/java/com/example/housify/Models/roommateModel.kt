@@ -2,6 +2,8 @@ package com.example.housify.Models
 
 import com.example.housify.UserModel
 
+//  Defining the roommate model for the roommate group living in the house
+
 class roommateModel {
     var roommateGroupId: String ?= ""
         get() = field?:""

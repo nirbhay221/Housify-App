@@ -3,6 +3,9 @@ package com.example.housify.Models
 import com.example.housify.UserModel
 import com.google.firebase.firestore.auth.User
 
+//  Defining the Task model for tasks that need to be done in the house
+// Includes title, description, deadline, person assigned
+
 class TaskModel {
     var taskId: String? = ""
         get() = field ?: ""

@@ -1,5 +1,7 @@
 package com.example.housify
 
+// Defining User Model for app users by storing their personal information
+
 class userModel {
     var firstName : String? = ""
         get() = field ?: ""

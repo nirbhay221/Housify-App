@@ -1,5 +1,8 @@
 package com.example.housify.Models
 
+// Defining the Transaction Model for the Expenses functionality
+// Storing amount paid to, from, and for what
+
 class transactionModel {
     var transactionId : String? = ""
         get() = field ?: ""

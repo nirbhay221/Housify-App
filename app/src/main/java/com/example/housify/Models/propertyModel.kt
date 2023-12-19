@@ -2,6 +2,9 @@ package com.example.housify.Models
 
 import com.example.housify.UserModel
 
+//  Defining the property model for all details regarding the property listing
+// includes title, type, rent, address, amenities, pictures and more
+
 class propertyModel {
     var propertyTitle : String? = ""
         get() = field ?: ""

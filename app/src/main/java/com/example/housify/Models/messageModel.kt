@@ -1,5 +1,7 @@
 package com.example.housify.Models
 
+//  Defining the model for messaging including message content, sender, receiver and timestamp
+
 class messageModel {
     var messageContent:String? = ""
         get() = field?: ""

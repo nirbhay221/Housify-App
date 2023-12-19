@@ -2,6 +2,7 @@ package com.example.housify.Models
 
 import com.example.housify.UserModel
 
+//  Defining the model for the events including title, description, id, roommate
 
 class eventModel {
     var eventId: String? = ""
