@@ -65,13 +65,13 @@
             android:hint="Property Built Year" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="200dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/propertyAreaInfo"
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="65dp"
             android:hint="Property Area" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -92,13 +92,13 @@
             android:hint="Total Bedrooms" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="200dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/propertyTotalBathrooms"
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="65dp"
             android:hint="Total Bathrooms" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -120,13 +120,13 @@
             android:hint="Price" />
     </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/propertyPriceMonthlyOrAnnuallyInfo"
-                android:layout_width="200dp"
+                android:layout_width="160dp"
                 android:layout_height="65dp"
                 android:hint="PriceMonthlyOrAnnually" />
         </com.google.android.material.textfield.TextInputLayout>

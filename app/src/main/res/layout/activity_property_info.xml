@@ -303,14 +303,6 @@
             android:src = "@drawable/chat">
 
         </ImageView>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:id = "@+id/likePropertyViewInfoPage"
-            android:src = "@drawable/ic_like">
-
-        </ImageView>
     </LinearLayout>
 
 </LinearLayout>
