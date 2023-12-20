@@ -19,6 +19,8 @@ import com.example.housify.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+// fragment for profile options
+
 class profileFragment: Fragment(R.layout.fragment_profile) {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var auth:FirebaseAuth

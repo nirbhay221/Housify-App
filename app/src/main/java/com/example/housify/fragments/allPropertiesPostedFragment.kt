@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 
+// fragment to view all the listed properties
 class allPropertiesPostedFragment : Fragment(R.layout.fragment_allpropertiesposted) {
     private lateinit var binding: FragmentAllpropertiespostedBinding
     private lateinit var recyclerView: RecyclerView

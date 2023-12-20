@@ -49,7 +49,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import java.util.Locale
 
-
+// fragment for the home layout of the app
 class homeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var binding:FragmentHomeBinding
     private lateinit var recyclerView: RecyclerView

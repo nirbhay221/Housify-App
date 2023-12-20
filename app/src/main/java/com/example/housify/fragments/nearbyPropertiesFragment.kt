@@ -31,6 +31,7 @@ import com.tomtom.sdk.search.common.error.SearchFailure
 import com.tomtom.sdk.search.online.OnlineSearch
 import kotlin.properties.Delegates
 
+// fragment for listing nearby properties based on user location via TomTom maps
 class nearbyPropertiesFragment: Fragment(R.layout.fragment_nearby_properties) {
     private lateinit var binding: FragmentNearbyPropertiesBinding
     private lateinit var recyclerView: RecyclerView

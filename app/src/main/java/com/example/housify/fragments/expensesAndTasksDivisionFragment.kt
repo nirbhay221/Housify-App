@@ -12,6 +12,7 @@ import com.example.housify.databinding.FragmentChatBinding
 import com.example.housify.databinding.FragmentExpensesTasksDivisionBinding
 import com.google.android.material.tabs.TabLayout
 
+// fragment for displaying expenses, tasks, groups, roommates
 class expensesAndTasksDivisionFragment : Fragment(R.layout.fragment_expenses_tasks_division) {
     private lateinit var binding: FragmentExpensesTasksDivisionBinding
     private lateinit var expensesStats: expensesFragment

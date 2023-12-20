@@ -24,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 
+// fragment for property view
+
 class propertyViewFragment:Fragment(R.layout.fragment_property_view) {
     private lateinit var binding: FragmentPropertyViewBinding
     private lateinit var recyclerView: RecyclerView

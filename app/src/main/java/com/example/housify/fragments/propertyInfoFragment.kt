@@ -10,6 +10,8 @@ import com.example.housify.R
 import com.example.housify.databinding.FragmentProfileBinding
 import com.example.housify.databinding.PropertyInfoFragmentBinding
 
+// fragment for information about property selected
+
 class propertyInfoFragment : Fragment(R.layout.property_info_fragment) {
     private lateinit var binding: PropertyInfoFragmentBinding
     override fun onCreateView(
