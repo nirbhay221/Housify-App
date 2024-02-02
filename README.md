@@ -1,3 +1,4 @@
+#Housify
 Housify - Your Ultimate Housing Companion
 Housify is a comprehensive mobile application built using Kotlin, designed to simplify the process of finding suitable housing, compatible roommates, and managing shared expenses efficiently.
 
