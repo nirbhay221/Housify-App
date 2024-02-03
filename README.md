@@ -51,6 +51,10 @@ https://github.com/nirbhay221/Housify-App
 
 Video:
 
+
+https://github.com/nirbhay221/Housify-App/assets/70895011/bf816fca-29a1-4640-a0c0-7bbcc8e4fe69
+
+
 https://github.com/nirbhay221/Housify-App/assets/70895011/b21b96d4-6cc7-40a1-ae5a-e589ce59213c
 
 
